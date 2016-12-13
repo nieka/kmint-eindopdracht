@@ -1,11 +1,12 @@
 #pragma once
 #include "IGameObject.h"
-class Impker :
+#include "IIMkerBehavior.h"
+class Imker :
 	public IGameObject
 {
 public:
-	Impker(SDLFacade * facade);
-	~Impker();
+	Imker(SDLFacade * facade);
+	~Imker();
 
 	void update(GameController* controller) override;
 	void draw(SDLFacade* facade) override;
@@ -16,5 +17,10 @@ public:
 	void setY(int y) override;
 	int getX() override;
 	int getY() override;
+
+	void setBehavior(ImkerBehavior* behavior);
+
+protected:
+	ImkerBehavior* _behavior;
 };
 

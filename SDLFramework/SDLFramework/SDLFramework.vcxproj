@@ -85,12 +85,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bee.cpp" />
+    <ClCompile Include="ChaseBees.cpp" />
+    <ClCompile Include="CollectPowerUp.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="Impker.cpp" />
+    <ClCompile Include="Imker.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Panic.cpp" />
     <ClCompile Include="SDLFacade.cpp" />
+    <ClCompile Include="UsePowerup.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,13 +102,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bee.h" />
+    <ClInclude Include="ChaseBees.h" />
+    <ClInclude Include="CollectPowerUp.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="Impker.h" />
+    <ClInclude Include="IIMkerBehavior.h" />
+    <ClInclude Include="Imker.h" />
+    <ClInclude Include="Panic.h" />
     <ClInclude Include="SDLFacade.h" />
+    <ClInclude Include="UsePowerup.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

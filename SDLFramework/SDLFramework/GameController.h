@@ -3,7 +3,7 @@
 #include "SDLFacade.h"
 #include "Graph.h"
 #include "IGameObject.h"
-#include "Impker.h"
+#include "Imker.h"
 
 
 class Edge;
@@ -23,7 +23,7 @@ private:
 	Graph graph;
 
 	std::vector<IGameObject*> _gameObjecten;
-	Impker* _impker;
+	Imker* _imker;
 	SDL_Texture *_background;
 
 };

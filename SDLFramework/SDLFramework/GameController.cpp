@@ -1,5 +1,5 @@
 #include "GameController.h"
-#include "Impker.h"
+#include "Imker.h"
 #include <iostream>
 #include <SDL_events.h>
 
@@ -30,9 +30,9 @@ void GameController::initialize()
 		_sdlFacade->SetTargetFPS(60);
 		_sdlFacade->SetColor(Color(255, 10, 40, 255));
 
-		_impker = new Impker(_sdlFacade);
+		_imker = new Imker(_sdlFacade);
 
-		_gameObjecten.push_back(_impker);
+		_gameObjecten.push_back(_imker);
 
 		fillGraph();
 		run();
@@ -298,8 +298,8 @@ void GameController::fillGraph()
 	graph.addVertex(vertex325);
 	auto vertex327 = new Vertex(384, 555); // Dit is de basis rechtsonder
 	vertex327->setImpker(true);
-	_impker->setX(384);
-	_impker->setY(555);
+	_imker->setX(384);
+	_imker->setY(555);
 
 	graph.addVertex(vertex327);
 	graph.addEdge(new Edge(vertex103, vertex104));
