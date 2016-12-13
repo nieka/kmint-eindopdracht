@@ -87,6 +87,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="Impker.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SDLFacade.cpp" />
     <ClCompile Include="Vertex.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="Impker.h" />
     <ClInclude Include="SDLFacade.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

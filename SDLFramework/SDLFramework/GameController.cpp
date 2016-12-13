@@ -1,16 +1,23 @@
 #include "GameController.h"
+#include "Impker.h"
 #include <iostream>
 #include <SDL_events.h>
 
 GameController::GameController()
 {
 	_sdlFacade = new SDLFacade();
+	_background = _sdlFacade->LoadTexture("map.png");
 }
 
 
 GameController::~GameController()
 {
 	delete _sdlFacade;
+	delete _sdlFacade;
+
+	for (int i = 0; i < _gameObjecten.size(); i++) {
+		delete _gameObjecten.at(i);
+	}
 }
 
 void GameController::initialize()
@@ -22,6 +29,10 @@ void GameController::initialize()
 	else {
 		_sdlFacade->SetTargetFPS(60);
 		_sdlFacade->SetColor(Color(255, 10, 40, 255));
+
+		_impker = new Impker(_sdlFacade);
+
+		_gameObjecten.push_back(_impker);
 
 		fillGraph();
 		run();
@@ -51,11 +62,16 @@ void GameController::run()
 			}
 		}
 
-		
-
 		//draw background
-		_sdlFacade->DrawTexture(_sdlFacade->LoadTexture("map.png"), 0, 0);
-graph.draw(_sdlFacade);
+		_sdlFacade->DrawTexture(_background, 0, 0);
+		
+		graph.draw(_sdlFacade);
+
+		for (int i = 0; i < _gameObjecten.size(); i++) {
+			_gameObjecten.at(i)->update(this);
+			_gameObjecten.at(i)->draw(_sdlFacade);
+		}
+		
 		_sdlFacade->EndTick();
 	}
 }
@@ -281,6 +297,10 @@ void GameController::fillGraph()
 	auto vertex325 = new Vertex(190, 576);
 	graph.addVertex(vertex325);
 	auto vertex327 = new Vertex(384, 555); // Dit is de basis rechtsonder
+	vertex327->setImpker(true);
+	_impker->setX(384);
+	_impker->setY(555);
+
 	graph.addVertex(vertex327);
 	graph.addEdge(new Edge(vertex103, vertex104));
 	graph.addEdge(new Edge(vertex106, vertex105));
