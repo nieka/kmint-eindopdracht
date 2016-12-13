@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bee.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -96,6 +97,7 @@
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bee.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="GameController.h" />
