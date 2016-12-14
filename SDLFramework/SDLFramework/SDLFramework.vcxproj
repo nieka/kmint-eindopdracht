@@ -85,6 +85,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bee.cpp" />
+    <ClCompile Include="BeeFlee.cpp" />
+    <ClCompile Include="BeeIdle.cpp" />
     <ClCompile Include="ChaseBees.cpp" />
     <ClCompile Include="CollectPowerUp.cpp" />
     <ClCompile Include="Edge.cpp" />
@@ -102,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bee.h" />
+    <ClInclude Include="BeeFlee.h" />
+    <ClInclude Include="BeeIdle.h" />
+    <ClInclude Include="IBeeBehavior.h" />
     <ClInclude Include="ChaseBees.h" />
     <ClInclude Include="CollectPowerUp.h" />
     <ClInclude Include="Config.h" />

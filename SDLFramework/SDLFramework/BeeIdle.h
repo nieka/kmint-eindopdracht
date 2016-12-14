@@ -9,4 +9,4 @@ public:
 
 	void checkState() override;
 	void update(GameController* controller) override;
-}; #pragma once
+};
