@@ -14,10 +14,13 @@ public:
 	GameController();
 	~GameController();
 	void initialize();
+	std::vector<IGameObject*> getGameobjecten() const;
 
 private:
 	void run();
 	void fillGraph();
+	void addBees();
+	int getRandom(int min, int max);
 
 	SDLFacade* _sdlFacade;
 	Graph graph;
