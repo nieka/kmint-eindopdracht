@@ -433,7 +433,7 @@ void GameController::fillGraph()
 
 void GameController::addBees()
 {
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 25; i++) {
 		IGameObject* bee = new Bee(_sdlFacade);
 		bee->setX(getRandom(1, 599));
 		bee->setY(getRandom(1, 599));

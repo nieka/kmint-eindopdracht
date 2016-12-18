@@ -33,7 +33,7 @@ float Vector2D::getY() const
 	return _y;
 }
 
-Vector2D Vector2D::multiply(Vector2D vector, int waarde)
+Vector2D Vector2D::multiply(Vector2D vector, float waarde)
 {
 	Vector2D r_vector;
 	r_vector.setX(vector.getX() * waarde);
@@ -68,7 +68,7 @@ void Vector2D::div(float value)
 
 void Vector2D::normalise()
 {
-	int lengte = std::sqrt(_x * _x + _y * _y);
+	float lengte = std::sqrt(_x * _x + _y * _y);
 	_x = _x / lengte;
 	_y = _y / lengte;
 }

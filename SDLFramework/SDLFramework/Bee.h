@@ -41,7 +41,7 @@ private:
 	int _topSpeed;
 	int _detectionRadius;
 	int _fleeSpeed;
-	const int _DESIREDSEPARATION = 10;
+	const int _DESIREDSEPARATION = 30;
 	const int _NEIGHBORRDIST = 50;
 
 	//help methodes for flocking

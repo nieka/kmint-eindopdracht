@@ -1,5 +1,7 @@
 #include "Bee.h"
 #include "GameController.h"
+#include <iostream>
+#include <string>
 
 
 
@@ -21,16 +23,17 @@ Bee::~Bee()
 
 void Bee::update(GameController * controller)
 {
+	std::cout << "first: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
 	flock(controller->getGameobjecten());
 
 	velocity = velocity.Add(velocity, acceleration);
 	velocity.limit(_topSpeed);
 	position = position.Add(position, velocity);
-	// Reset accelertion to 0 each cycle
-	acceleration = acceleration.multiply(acceleration, 0);
 
 	this->setX(position.getX());
-	this->setY(position.getY());	
+	this->setY(position.getY());
+
+	std::cout << "second: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
 }
 
 void Bee::draw(SDLFacade * facade)
@@ -147,7 +150,7 @@ Vector2D Bee::separate(std::vector<IGameObject*> bees)
 	for each (Bee* bee in bees)
 	{
 		float distance = position.dist(position, bee->getPosition());
-		if (distance > 0 && distance < _DESIREDSEPARATION) {
+		if (bee != this && distance >= 0 && distance < _DESIREDSEPARATION) {
 			Vector2D diff = position.sub(position, bee->getPosition());
 			diff.normalise();
 			diff.div(distance);
