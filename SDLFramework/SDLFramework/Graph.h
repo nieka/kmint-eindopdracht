@@ -15,9 +15,10 @@ public:
 	std::vector<Edge*> edges;
 	void move(Vertex* start, Vertex* goal);
 	void draw(SDLFacade* facade);
-	const Vertex* getPowerUp();
+	Vertex* getPowerUp();
+	Vertex* getImker();
 	void setPowerUp(SDLFacade* sdl);
-
+	void setImker(Vertex* loc);
 private:
 	int heuristic(Vertex* start, Vertex* goal);
 	void move(Vertex* node);
@@ -25,7 +26,6 @@ private:
 	Vertex* _impkerLocation;
 	Vertex* _PowerUp;
 
-	SDLFacade* _sdl;
 	SDL_Texture *_pill;
 };
 

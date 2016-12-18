@@ -100,9 +100,14 @@ void Graph::draw(SDLFacade * facade)
 
 }
 
-const Vertex * Graph::getPowerUp()
+Vertex * Graph::getPowerUp()
 {
 	return _PowerUp;
+}
+
+Vertex * Graph::getImker()
+{
+	return _impkerLocation;
 }
 
 void Graph::setPowerUp(SDLFacade* sdl)
@@ -112,6 +117,11 @@ void Graph::setPowerUp(SDLFacade* sdl)
 	srand(time(NULL));
 	_PowerUp = nodes[(rand() % nodes.size())];
 	_PowerUp->setPowerUp(true);
+}
+
+void Graph::setImker(Vertex * loc)
+{
+	_impkerLocation = loc;
 }
 
 int Graph::heuristic(Vertex * start, Vertex * goal)

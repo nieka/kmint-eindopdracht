@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "SDLFacade.h"
-//#include "GameController.h"
 
 class Edge;
 
@@ -35,6 +34,5 @@ private:
 	int g;
 	bool _hasImpker;
 	bool _hasPowerUp;
-	//GameController* _gamecontroller;
 };
 
