@@ -16,11 +16,12 @@ GameController::GameController()
 GameController::~GameController()
 {
 	delete _sdlFacade;
-	delete _imker;
 
 	for (int i = 0; i < _gameObjecten.size(); i++) {
 		delete _gameObjecten.at(i);
 	}
+	
+	delete _imker;
 }
 
 void GameController::initialize()
@@ -45,6 +46,11 @@ void GameController::initialize()
 std::vector<IGameObject*> GameController::getGameobjecten() const
 {
 	return _gameObjecten;
+}
+
+Imker* GameController::getImker() const
+{
+	return _imker;
 }
 
 void GameController::run()

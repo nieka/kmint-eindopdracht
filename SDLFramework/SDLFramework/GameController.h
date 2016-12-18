@@ -15,6 +15,7 @@ public:
 	~GameController();
 	void initialize();
 	std::vector<IGameObject*> getGameobjecten() const;
+	Imker* getImker() const;
 
 private:
 	void run();
