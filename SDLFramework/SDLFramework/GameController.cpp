@@ -1,7 +1,10 @@
 #include "GameController.h"
 #include "Imker.h"
+#include "Bee.h"
 #include <iostream>
 #include <SDL_events.h>
+#include <random>
+
 
 GameController::GameController()
 {
@@ -13,7 +16,7 @@ GameController::GameController()
 GameController::~GameController()
 {
 	delete _sdlFacade;
-	delete _sdlFacade;
+	delete _imker;
 
 	for (int i = 0; i < _gameObjecten.size(); i++) {
 		delete _gameObjecten.at(i);
@@ -32,11 +35,16 @@ void GameController::initialize()
 
 		_imker = new Imker(_sdlFacade);
 
-		_gameObjecten.push_back(_imker);
 
 		fillGraph();
+		addBees();
 		run();
 	}
+}
+
+std::vector<IGameObject*> GameController::getGameobjecten() const
+{
+	return _gameObjecten;
 }
 
 void GameController::run()
@@ -71,6 +79,9 @@ void GameController::run()
 			_gameObjecten.at(i)->update(this);
 			_gameObjecten.at(i)->draw(_sdlFacade);
 		}
+
+		_imker->update(this);
+		_imker->draw(_sdlFacade);
 		
 		_sdlFacade->EndTick();
 	}
@@ -418,4 +429,24 @@ void GameController::fillGraph()
 	graph.addEdge(new Edge(vertex180, vertex181));
 	graph.addEdge(new Edge(vertex325, vertex322));
 	graph.addEdge(new Edge(vertex204, vertex327));
+}
+
+void GameController::addBees()
+{
+	for (int i = 0; i < 100; i++) {
+		IGameObject* bee = new Bee(_sdlFacade);
+		bee->setX(getRandom(1, 599));
+		bee->setY(getRandom(1, 599));
+		_gameObjecten.push_back(bee);
+	}
+}
+
+int GameController::getRandom(int min, int max)
+{
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(min, max); // guaranteed unbiased
+
+	return uni(rng);
+
 }
