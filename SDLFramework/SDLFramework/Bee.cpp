@@ -2,7 +2,7 @@
 #include "GameController.h"
 #include <iostream>
 #include <string>
-
+#include <random>
 
 
 Bee::Bee(SDLFacade* facade)
@@ -13,6 +13,13 @@ Bee::Bee(SDLFacade* facade)
 	_mass = 5;
 	_topSpeed = 5;
 	maxforce = 20;
+
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(0, 600); // guaranteed unbiased
+
+	velocity.setX(uni(rng));
+	velocity.sety(uni(rng));
 }
 
 
