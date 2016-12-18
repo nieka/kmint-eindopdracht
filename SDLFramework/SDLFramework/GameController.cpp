@@ -7,12 +7,13 @@ GameController::GameController()
 {
 	_sdlFacade = new SDLFacade();
 	_background = _sdlFacade->LoadTexture("map.png");
+	
 }
 
 
 GameController::~GameController()
 {
-	delete _sdlFacade;
+	_sdlFacade->RemoveTexture(_background);
 	delete _sdlFacade;
 
 	for (int i = 0; i < _gameObjecten.size(); i++) {
@@ -35,6 +36,7 @@ void GameController::initialize()
 		_gameObjecten.push_back(_imker);
 
 		fillGraph();
+		graph.setPowerUp(_sdlFacade);
 		run();
 	}
 }

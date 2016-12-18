@@ -4,6 +4,8 @@
 #include <math.h>  
 #include <set>
 #include <iostream>
+#include <time.h> 
+
 struct compare
 {
 	bool operator()(Vertex* l, Vertex* r)
@@ -88,7 +90,28 @@ void Graph::draw(SDLFacade * facade)
 	facade->SetColor(Color(0, 0, 255, 255));
 	for (int i = 0; i < nodes.size(); i++) {
 		nodes.at(i)->draw(facade);
+
+		if (nodes.at(i)->hasPowerUP())
+		{
+			facade->DrawTexture(_pill, nodes.at(i)->getX(), nodes.at(i)->getY(),25,25);
+		}
 	}
+
+
+}
+
+const Vertex * Graph::getPowerUp()
+{
+	return _PowerUp;
+}
+
+void Graph::setPowerUp(SDLFacade* sdl)
+{
+	_pill = sdl->LoadTexture("pill.png");
+
+	srand(time(NULL));
+	_PowerUp = nodes[(rand() % nodes.size())];
+	_PowerUp->setPowerUp(true);
 }
 
 int Graph::heuristic(Vertex * start, Vertex * goal)

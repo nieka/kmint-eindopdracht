@@ -56,6 +56,16 @@ void Vertex::setImpker(bool impker)
 	_hasImpker = impker;
 }
 
+bool Vertex::hasPowerUP() const
+{
+	return _hasPowerUp;
+}
+
+void Vertex::setPowerUp(bool p)
+{
+	_hasPowerUp = p;
+}
+
 int Vertex::getF()
 {
 	return f;
@@ -70,6 +80,10 @@ void Vertex::draw(SDLFacade* app)
 {
 	app->DrawCircle(getX(), getY(), 5, true);
 
+	if (_hasPowerUp)
+	{
+		//app->DrawTexture(_x, _y, 50, 50);
+	}
 }
 
 std::vector<Edge*> Vertex::getEdges()
