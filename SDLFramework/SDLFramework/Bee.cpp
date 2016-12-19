@@ -14,6 +14,7 @@ Bee::Bee(SDLFacade* facade)
 	_topSpeed = 5;
 	maxforce = 20;
 	_detectionRadius = 75;
+	_fleeSpeed = 3;
 
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
@@ -31,7 +32,6 @@ Bee::~Bee()
 
 void Bee::update(GameController * controller)
 {
-	std::cout << "first: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
 	flock(controller);
 
 	velocity = velocity.Add(velocity, acceleration);
@@ -41,12 +41,15 @@ void Bee::update(GameController * controller)
 	this->setX(position.getX());
 	this->setY(position.getY());
 
-	std::cout << "second: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
+	_ticksALive++;
 }
 
 void Bee::draw(SDLFacade * facade)
 {
-	facade->DrawTexture(_texture, getX(), getY(), 25, 19);
+	if (!_catched) {
+		facade->DrawTexture(_texture, getX(), getY(), 25, 19);
+	}
+	
 }
 
 void Bee::move(GameController * controller)
@@ -127,6 +130,21 @@ int Bee::getDetectionRadius() const
 int Bee::FleeSpeed() const
 {
 	return _fleeSpeed;
+}
+
+int Bee::getTickalive() const
+{
+	return _ticksALive;
+}
+
+void Bee::setCathced(bool value)
+{
+	_catched = value;
+}
+
+bool Bee::isCathced() const
+{
+	return _catched;
 }
 
 Vector2D Bee::getPosition()
@@ -259,7 +277,7 @@ Vector2D Bee::fleeImpker(Imker* imker)
 		diff.div(distance);
 		steer = steer.Add(steer, diff);
 		steer.normalise();
-		steer = steer.multiply(steer, _topSpeed);
+		steer = steer.multiply(steer, _fleeSpeed);
 		steer = steer.sub(steer, velocity);
 
 		if (distance < 40) {

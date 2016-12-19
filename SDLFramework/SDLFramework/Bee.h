@@ -27,6 +27,9 @@ public:
 	int getTopSpeed() const;
 	int getDetectionRadius() const;
 	int FleeSpeed() const;
+	int getTickalive() const;
+	void setCathced(bool value);
+	bool isCathced() const;
 
 	Vector2D getPosition();
 
@@ -42,9 +45,12 @@ private:
 	int _topSpeed;
 	int _detectionRadius;
 	int _fleeSpeed;
+	int _ticksALive;
+	bool _catched = false;
+
 	const int _DESIREDSEPARATION = 30;
 	const int _NEIGHBORRDIST = 50;
-
+	
 	//help methodes for flocking
 	void flock(GameController* controller);
 	Vector2D separate(std::vector<IGameObject*> bees);

@@ -95,6 +95,7 @@
     <ClCompile Include="Panic.cpp" />
     <ClCompile Include="SDLFacade.cpp" />
     <ClCompile Include="UsePowerup.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="Panic.h" />
     <ClInclude Include="SDLFacade.h" />
     <ClInclude Include="UsePowerup.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

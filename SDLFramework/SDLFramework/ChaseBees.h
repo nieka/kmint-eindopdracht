@@ -9,5 +9,8 @@ public:
 
 	void checkState() override;
 	void update(GameController* controller) override;
+
+private:
+	int _catchedBees;
 };
 

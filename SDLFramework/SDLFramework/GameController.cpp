@@ -21,7 +21,7 @@ GameController::~GameController()
 		delete _gameObjecten.at(i);
 	}
 	
-	delete _imker;
+	//delete _imker; the game crashed when _imker is deleted
 }
 
 void GameController::initialize()

@@ -17,10 +17,12 @@ public:
 	void setY(int y) override;
 	int getX() override;
 	int getY() override;
+	int getCatchRadius() const;
 
 	void setBehavior(ImkerBehavior* behavior);
 
 protected:
 	ImkerBehavior* _behavior;
+	float _catchRadius;
 };
 
