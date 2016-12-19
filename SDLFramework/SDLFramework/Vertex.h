@@ -24,6 +24,8 @@ public:
 	Vertex * getParent();
 	bool hasImpker() const;
 	void setImpker(bool impker);
+	bool hasPowerUP() const;
+	void setPowerUp(bool p);
 private:
 	int _x;
 	int _y;
@@ -31,5 +33,6 @@ private:
 	Vertex* parent;
 	int g;
 	bool _hasImpker;
+	bool _hasPowerUp;
 };
 

@@ -1,10 +1,12 @@
 #include "Imker.h"
 #include "ChaseBees.h"
+#include "CollectPowerUp.h"
 
 Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
-	_behavior = new ChaseBees(this);
+	//_behavior = new ChaseBees(this);
+	_behavior = new CollectPowerUp(this);
 }
 
 
@@ -25,8 +27,9 @@ void Imker::draw(SDLFacade * facade)
 	facade->DrawTexture(_texture, _x, _y,52,75);
 }
 
-void Imker::move(GameController * controller)
+void Imker::move(GameController* controller)
 {
+	_behavior->Move(controller);
 }
 
 void Imker::setX(int x)
