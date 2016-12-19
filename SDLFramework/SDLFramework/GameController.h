@@ -16,6 +16,8 @@ public:
 	void initialize();
 	std::vector<IGameObject*> getGameobjecten() const;
 	Graph* getGrapth();
+	Imker* getImker() const;
+
 private:
 	void run();
 	void fillGraph();

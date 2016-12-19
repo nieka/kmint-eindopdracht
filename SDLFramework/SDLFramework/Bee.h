@@ -1,6 +1,7 @@
 #pragma once
 #include "IGameObject.h"
 #include "Vector2D.h"
+class Imker;
 class Bee :
 	public IGameObject
 {
@@ -29,7 +30,7 @@ public:
 
 	Vector2D getPosition();
 
-	void flock(std::vector<IGameObject*> bees);
+	
 
 private:
 	Vector2D position;
@@ -41,14 +42,16 @@ private:
 	int _topSpeed;
 	int _detectionRadius;
 	int _fleeSpeed;
-	const int _DESIREDSEPARATION = 10;
+	const int _DESIREDSEPARATION = 30;
 	const int _NEIGHBORRDIST = 50;
 
 	//help methodes for flocking
+	void flock(GameController* controller);
 	Vector2D separate(std::vector<IGameObject*> bees);
 	Vector2D align(std::vector<IGameObject*> bees);
 	Vector2D cohesion(std::vector<IGameObject*> bees);
 	Vector2D seek(Vector2D target);
+	Vector2D fleeImpker(Imker* imker);
 	void applyForce(Vector2D force);
 };
 

@@ -1,6 +1,8 @@
 #include "Bee.h"
 #include "GameController.h"
-
+#include <iostream>
+#include <string>
+#include <random>
 
 
 Bee::Bee(SDLFacade* facade)
@@ -11,6 +13,14 @@ Bee::Bee(SDLFacade* facade)
 	_mass = 5;
 	_topSpeed = 5;
 	maxforce = 20;
+	_detectionRadius = 75;
+
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(0, 600); // guaranteed unbiased
+
+	velocity.setX(uni(rng));
+	velocity.sety(uni(rng));
 }
 
 
@@ -21,16 +31,17 @@ Bee::~Bee()
 
 void Bee::update(GameController * controller)
 {
-	flock(controller->getGameobjecten());
+	std::cout << "first: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
+	flock(controller);
 
 	velocity = velocity.Add(velocity, acceleration);
 	velocity.limit(_topSpeed);
 	position = position.Add(position, velocity);
-	// Reset accelertion to 0 each cycle
-	acceleration = acceleration.multiply(acceleration, 0);
 
 	this->setX(position.getX());
-	this->setY(position.getY());	
+	this->setY(position.getY());
+
+	std::cout << "second: x= " << std::to_string(getX()) << " y= " << std::to_string(getY()) << std::endl;
 }
 
 void Bee::draw(SDLFacade * facade)
@@ -123,19 +134,22 @@ Vector2D Bee::getPosition()
 	return position;
 }
 
-void Bee::flock(std::vector<IGameObject*> bees)
+void Bee::flock(GameController* controller)
 {
-	Vector2D sep = separate(bees);
-	Vector2D ali = align(bees);
-	Vector2D coh = cohesion(bees);
+	Vector2D sep = separate(controller->getGameobjecten());
+	Vector2D ali = align(controller->getGameobjecten());
+	Vector2D coh = cohesion(controller->getGameobjecten());
+	Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
 
-	sep = sep.multiply(sep, 1.5);
-	ali = ali.multiply(ali, 1.0);
-	coh = coh.multiply(coh, 1.0);
+	sep = sep.multiply(sep, 1);
+	ali = ali.multiply(ali, 2);
+	coh = coh.multiply(coh, 2.5);
+	flI = flI.multiply(flI, 5);
 
 	applyForce(sep);
 	applyForce(ali);
 	applyForce(coh);
+	applyForce(flI);
 }
 
 Vector2D Bee::separate(std::vector<IGameObject*> bees)
@@ -147,7 +161,7 @@ Vector2D Bee::separate(std::vector<IGameObject*> bees)
 	for each (Bee* bee in bees)
 	{
 		float distance = position.dist(position, bee->getPosition());
-		if (distance > 0 && distance < _DESIREDSEPARATION) {
+		if (bee != this && distance >= 0 && distance < _DESIREDSEPARATION) {
 			Vector2D diff = position.sub(position, bee->getPosition());
 			diff.normalise();
 			diff.div(distance);
@@ -227,6 +241,32 @@ Vector2D Bee::seek(Vector2D target)
 
 	Vector2D steer = desired.sub(desired, velocity);
 	steer.limit(maxforce);
+	return steer;
+}
+
+Vector2D Bee::fleeImpker(Imker* imker)
+{
+	Vector2D v_imker;
+	v_imker.setX(imker->getX());
+	v_imker.sety(imker->getY());
+	Vector2D steer;
+
+	float distance = position.dist(position, v_imker);
+	if (distance > 0 && distance < _detectionRadius) {
+		//the bee can the imker so he flies away
+		Vector2D diff = position.sub(position, v_imker);
+		diff.normalise();
+		diff.div(distance);
+		steer = steer.Add(steer, diff);
+		steer.normalise();
+		steer = steer.multiply(steer, _topSpeed);
+		steer = steer.sub(steer, velocity);
+
+		if (distance < 40) {
+			steer = steer.multiply(steer, 5);
+		}
+	}
+
 	return steer;
 }
 
