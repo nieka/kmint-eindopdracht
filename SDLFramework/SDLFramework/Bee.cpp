@@ -154,20 +154,26 @@ Vector2D Bee::getPosition()
 
 void Bee::flock(GameController* controller)
 {
-	Vector2D sep = separate(controller->getGameobjecten());
-	Vector2D ali = align(controller->getGameobjecten());
-	Vector2D coh = cohesion(controller->getGameobjecten());
-	//Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
+	Vector2D sep = separate(controller->getGameobjecten()); // werkt goed
+	Vector2D ali = align(controller->getGameobjecten()); 
+	Vector2D coh = cohesion(controller->getGameobjecten()); // werkt goed
+	Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
 
-	sep = sep.multiply(sep, 1);
-	ali = ali.multiply(ali, 2);
-	coh = coh.multiply(coh, 2.5);
-//	flI = flI.multiply(flI, 10);
+	sep = sep.multiply(sep, 6);
+	ali = ali.multiply(ali, 4);
+	coh = coh.multiply(coh, 3);
+	flI = flI.multiply(flI, 10);
 
 	applyForce(sep);
-	applyForce(ali);
+	if (ali.getX() == 0 && ali.getY() == 0) {
+		
+	}
+	else {
+		applyForce(ali);
+	}
+	
 	applyForce(coh);
-//	applyForce(flI);
+	applyForce(flI);
 }
 
 Vector2D Bee::separate(std::vector<IGameObject*> bees)
@@ -218,7 +224,9 @@ Vector2D Bee::align(std::vector<IGameObject*> bees)
 	}
 
 	if (count > 0) {
-		sum.div(count);
+		sum.div((float)count);
+		sum.normalise();
+
 		sum = sum.multiply(sum,_topSpeed);
 		Vector2D steer = sum.sub(sum,velocity);
 		steer.limit(maxforce);
