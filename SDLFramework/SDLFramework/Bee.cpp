@@ -41,6 +41,8 @@ void Bee::update(GameController * controller)
 	this->setX(position.getX());
 	this->setY(position.getY());
 
+	//acceleration = acceleration.multiply(acceleration, 0);
+
 	_ticksALive++;
 }
 
@@ -158,22 +160,19 @@ void Bee::flock(GameController* controller)
 	Vector2D ali = align(controller->getGameobjecten()); 
 	Vector2D coh = cohesion(controller->getGameobjecten()); // werkt goed
 	Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
+	Vector2D wfS = wanderFormSite();
 
 	sep = sep.multiply(sep, 6);
 	ali = ali.multiply(ali, 4);
 	coh = coh.multiply(coh, 3);
 	flI = flI.multiply(flI, 10);
+	wfS = flI.multiply(wfS, 10);
 
 	applyForce(sep);
-	if (ali.getX() == 0 && ali.getY() == 0) {
-		
-	}
-	else {
-		applyForce(ali);
-	}
-	
+	applyForce(ali);
 	applyForce(coh);
 	applyForce(flI);
+	applyForce(wfS);
 }
 
 Vector2D Bee::separate(std::vector<IGameObject*> bees)
@@ -291,6 +290,20 @@ Vector2D Bee::fleeImpker(Imker* imker)
 		if (distance < 40) {
 			steer = steer.multiply(steer, 5);
 		}
+	}
+
+	return steer;
+}
+
+Vector2D Bee::wanderFormSite()
+{
+	Vector2D steer;
+
+	if (getX() < 20 || getX() > 580 || getY() < 20 || getY() > 580) {
+		steer.setX(600 - getX());
+		steer.sety(600 - getY());
+		steer = steer.multiply(steer, _topSpeed);
+		steer.normalise();
 	}
 
 	return steer;

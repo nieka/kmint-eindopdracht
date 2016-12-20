@@ -58,6 +58,7 @@ private:
 	Vector2D cohesion(std::vector<IGameObject*> bees);
 	Vector2D seek(Vector2D target);
 	Vector2D fleeImpker(Imker* imker);
+	Vector2D wanderFormSite();
 	void applyForce(Vector2D force);
 };
 
