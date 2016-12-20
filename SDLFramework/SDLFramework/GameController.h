@@ -15,16 +15,18 @@ public:
 	~GameController();
 	void initialize();
 	std::vector<IGameObject*> getGameobjecten() const;
+	Graph* getGrapth();
 	Imker* getImker() const;
+	
 
 private:
 	void run();
 	void fillGraph();
 	void addBees();
-	int getRandom(int min, int max);
+	
 
 	SDLFacade* _sdlFacade;
-	Graph graph;
+	Graph* graph;
 
 	std::vector<IGameObject*> _gameObjecten;
 	Imker* _imker;

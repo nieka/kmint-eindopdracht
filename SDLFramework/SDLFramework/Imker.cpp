@@ -1,10 +1,12 @@
 #include "Imker.h"
 #include "ChaseBees.h"
+#include "GoToBase.h"
+#include "CollectPowerUp.h"
 
 Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
-	_behavior = new ChaseBees(this);
+	_behavior = new CollectPowerUp(this);
 	_catchRadius = 100;
 }
 
@@ -16,7 +18,7 @@ Imker::~Imker()
 
 void Imker::update(GameController * controller)
 {
-	_behavior->checkState();
+	_behavior->checkState(controller);
 
 	_behavior->update(controller);
 	_catchRadius += 0.333;
@@ -28,8 +30,9 @@ void Imker::draw(SDLFacade * facade)
 	facade->DrawCircle(_x, _y, _catchRadius, false);
 }
 
-void Imker::move(GameController * controller)
+void Imker::move(GameController* controller)
 {
+	_behavior->Move(controller);
 }
 
 void Imker::setX(int x)
@@ -55,6 +58,16 @@ int Imker::getY()
 int Imker::getCatchRadius() const
 {
 	return _catchRadius;
+}
+
+void Imker::addcatchedBee(IGameObject * bee)
+{
+	_catchedBees.push_back(bee);
+}
+
+std::vector<IGameObject*> Imker::getChatchedBees()
+{
+	return _catchedBees;
 }
 
 void Imker::setBehavior(ImkerBehavior * behavior)

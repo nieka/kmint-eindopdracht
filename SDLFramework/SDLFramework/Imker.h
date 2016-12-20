@@ -1,6 +1,7 @@
 #pragma once
 #include "IGameObject.h"
 #include "IIMkerBehavior.h"
+#include <vector>
 class Imker :
 	public IGameObject
 {
@@ -18,11 +19,14 @@ public:
 	int getX() override;
 	int getY() override;
 	int getCatchRadius() const;
+	void addcatchedBee(IGameObject* bee);
+	std::vector<IGameObject*> getChatchedBees();
 
 	void setBehavior(ImkerBehavior* behavior);
 
 protected:
 	ImkerBehavior* _behavior;
 	float _catchRadius;
+	std::vector<IGameObject*> _catchedBees;
 };
 

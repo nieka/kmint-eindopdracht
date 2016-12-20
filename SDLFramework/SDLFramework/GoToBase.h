@@ -1,19 +1,18 @@
 #pragma once
 #include "IIMkerBehavior.h"
-#include "Utils.h"
+#include "Graph.h"
+#include "Imker.h"
+#include "GameController.h"
 
-class Panic :
+class GoToBase :
 	public ImkerBehavior
 {
 public:
-	Panic(Imker* imker);
-	~Panic();
+	GoToBase(Imker* imker);
+	~GoToBase();
 
 	void checkState(GameController * controller) override;
 	void update(GameController* controller) override;
 	void Move(GameController* controller) override;
-
-private:
-	Utils utils;
 };
 

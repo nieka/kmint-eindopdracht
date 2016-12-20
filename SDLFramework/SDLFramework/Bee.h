@@ -48,8 +48,8 @@ private:
 	int _ticksALive;
 	bool _catched = false;
 
-	const int _DESIREDSEPARATION = 30;
-	const int _NEIGHBORRDIST = 50;
+	const int _DESIREDSEPARATION = 40;
+	const int _NEIGHBORRDIST = 75;
 	
 	//help methodes for flocking
 	void flock(GameController* controller);

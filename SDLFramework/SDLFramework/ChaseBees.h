@@ -7,10 +7,10 @@ public:
 	ChaseBees(Imker* imker);
 	~ChaseBees();
 
-	void checkState() override;
+	void checkState(GameController * controller) override;
 	void update(GameController* controller) override;
+	void Move(GameController* controller) override;
 
-private:
-	int _catchedBees;
+	
 };
 

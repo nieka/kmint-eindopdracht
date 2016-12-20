@@ -6,5 +6,6 @@ public:
 	~Utils();
 	int min(int minvalue, int value);
 	int max(int maxvalue, int value);
+	int getRandom(int min, int max);
 };
 

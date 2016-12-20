@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SDLFacade.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Bee.cpp">
+      <Filter>Source\gameobjecten</Filter>
+    </ClCompile>
+    <ClCompile Include="Imker.cpp">
+      <Filter>Source\gameobjecten</Filter>
+    </ClCompile>
+    <ClCompile Include="ChaseBees.cpp">
+      <Filter>Source\ImkerBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Panic.cpp">
+      <Filter>Source\ImkerBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectPowerUp.cpp">
+      <Filter>Source\ImkerBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GoToBase.cpp">
+      <Filter>Source\ImkerBehavior</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="SDLFacade.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Bee.h">
+      <Filter>Header\gameobjecten</Filter>
+    </ClInclude>
+    <ClInclude Include="Imker.h">
+      <Filter>Header\gameobjecten</Filter>
+    </ClInclude>
+    <ClInclude Include="IIMkerBehavior.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="ChaseBees.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Panic.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectPowerUp.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameObject.h">
+      <Filter>Header\gameobjecten</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GoToBase.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{fdbab711-cf81-4960-9aa6-43b40be7a6bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{2db03f9a-ab05-4ccf-9a44-2c5e14a1bbda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\gameobjecten">
+      <UniqueIdentifier>{78f1fe4d-4e25-49f8-8d00-7ec7ffdaaa5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\gameobjecten">
+      <UniqueIdentifier>{b53f285f-d5e0-49f0-a126-8b32192303f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ImkerBehavior">
+      <UniqueIdentifier>{d613e319-2c4e-42e1-88b1-f9636826ca6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\ImkerBehavior">
+      <UniqueIdentifier>{c828be60-4efe-4ba0-9909-9ba6217820c7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -13,8 +13,8 @@ Bee::Bee(SDLFacade* facade)
 	_mass = 5;
 	_topSpeed = 5;
 	maxforce = 20;
-	_detectionRadius = 75;
-	_fleeSpeed = 3;
+	_detectionRadius = 100;
+	_fleeSpeed = 7;
 
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
@@ -157,17 +157,17 @@ void Bee::flock(GameController* controller)
 	Vector2D sep = separate(controller->getGameobjecten());
 	Vector2D ali = align(controller->getGameobjecten());
 	Vector2D coh = cohesion(controller->getGameobjecten());
-	Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
+	//Vector2D flI = fleeImpker(controller->getImker()); //vector away from the imker
 
 	sep = sep.multiply(sep, 1);
 	ali = ali.multiply(ali, 2);
 	coh = coh.multiply(coh, 2.5);
-	flI = flI.multiply(flI, 5);
+//	flI = flI.multiply(flI, 10);
 
 	applyForce(sep);
 	applyForce(ali);
 	applyForce(coh);
-	applyForce(flI);
+//	applyForce(flI);
 }
 
 Vector2D Bee::separate(std::vector<IGameObject*> bees)
