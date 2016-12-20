@@ -1,9 +1,16 @@
 #include "Edge.h"
 
 
-Edge::Edge(Vertex* vertex1, Vertex* vertex2, int weigth)
+Edge::Edge(Vertex* vertex1, Vertex* vertex2)
 {
-	this->_weigth = weigth;
+	Vector2D v1;
+	v1.setX(vertex1->getX());
+	v1.sety(vertex1->getY());
+	Vector2D v2;
+	v2.setX(vertex2->getX());
+	v2.sety(vertex2->getY());
+	_weigth = v1.dist(v1, v2);
+
 	vertex1->addEdge(this);
 	vertex2->addEdge(this);
 	_vertex1 = vertex1;

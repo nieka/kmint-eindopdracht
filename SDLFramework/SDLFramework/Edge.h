@@ -1,11 +1,12 @@
 #pragma once
 #include "Vertex.h"
 #include "SDLFacade.h"
+#include "Vector2D.h"
 
 class Edge
 {
 public:
-	Edge(Vertex* vertex1, Vertex* vertex2, int weigth = 0);
+	Edge(Vertex* vertex1, Vertex* vertex2);
 	~Edge();
 	Vertex* getVertex1();
 	Vertex* getVertex2();

@@ -22,25 +22,6 @@ void GoToBase::checkState(GameController * controller)
 
 void GoToBase::update(GameController * controller)
 {
-	Graph* graph = controller->getGrapth();
-
-	if (_imker->getX() < graph->getImker()->getX())
-	{
-		_imker->setX(_imker->getX() + 1);
-	}
-	else if (_imker->getX() > graph->getImker()->getX())
-	{
-		_imker->setX(_imker->getX() - 1);
-	}
-
-	if (_imker->getY() < graph->getImker()->getY())
-	{
-		_imker->setY(_imker->getY() + 1);
-	}
-	else if (_imker->getY() > graph->getImker()->getY())
-	{
-		_imker->setY(_imker->getY() - 1);
-	}
 }
 
 void GoToBase::Move(GameController * controller)
