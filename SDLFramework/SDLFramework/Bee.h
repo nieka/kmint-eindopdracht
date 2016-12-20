@@ -48,7 +48,7 @@ private:
 	int _ticksALive;
 	bool _catched = false;
 
-	const int _DESIREDSEPARATION = 40;
+	const float _DESIREDSEPARATION = 25.0f;
 	const int _NEIGHBORRDIST = 75;
 	
 	//help methodes for flocking
