@@ -9,8 +9,8 @@ Edge::Edge(Vertex* vertex1, Vertex* vertex2)
 	Vector2D v2;
 	v2.setX(vertex2->getX());
 	v2.sety(vertex2->getY());
-	//_weigth = v1.dist(v1, v2);
-	_weigth = 0;
+	_weigth = v1.dist(v1, v2);
+	//_weigth = 0;
 
 	vertex1->addEdge(this);
 	vertex2->addEdge(this);
