@@ -59,7 +59,7 @@ void Graph::move(Vertex* start, Vertex* goal)
 			for each (Vertex* neighbor in getNeighbors(current))
 			{
 				if (!(std::find(cl.begin(), cl.end(), neighbor) != cl.end())) {
-					neighbor->setF(neighbor->getG() + heuristic(neighbor, goal));
+					neighbor->setF(neighbor->getG() + heuristic(neighbor, goal)); // boosdoener
 					if (!(std::find(set.begin(), set.end(), neighbor) != set.end())) {
 						//neighbor zit nog niet in de openlist
 						ol.push(neighbor);

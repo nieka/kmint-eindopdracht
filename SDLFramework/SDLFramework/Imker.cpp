@@ -45,7 +45,9 @@ void Imker::update(GameController * controller)
 
 void Imker::draw(SDLFacade * facade)
 {
-	facade->DrawTexture(_texture, _x, _y,52,75);
+	_offsetX = _x;
+	_offsetY = _y - 25;
+	facade->DrawTexture(_texture, _offsetX, _offsetY,52,75);
 	facade->DrawCircle(_x, _y, _catchRadius, false);
 }
 
