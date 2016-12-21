@@ -19,6 +19,8 @@ public:
 protected:
 	int _x;
 	int _y;
+	int _offsetX;
+	int _offsetY;
 	SDL_Texture *_texture;
 
 };

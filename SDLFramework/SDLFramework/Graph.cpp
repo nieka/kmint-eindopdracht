@@ -59,8 +59,8 @@ void Graph::move(Vertex* start, Vertex* goal)
 			for each (Vertex* neighbor in getNeighbors(current))
 			{
 				if (!(std::find(cl.begin(), cl.end(), neighbor) != cl.end())) {
-					neighbor->setF(neighbor->getG() + heuristic(neighbor, goal));
 					if (!(std::find(set.begin(), set.end(), neighbor) != set.end())) {
+						neighbor->setF(neighbor->getG() + heuristic(neighbor, goal)); // boosdoener
 						//neighbor zit nog niet in de openlist
 						ol.push(neighbor);
 						set.insert(neighbor);
@@ -136,7 +136,7 @@ void Graph::setBase(Vertex * base)
 
 int Graph::heuristic(Vertex * start, Vertex * goal)
 {
-	return sqrt(pow(start->getX() - goal->getX(), 2) + pow(start->getY() - goal->getY(), 2));
+	return sqrt(pow(start->getX() - goal->getX(), 2) + pow(start->getY() - goal->getY(), 2) * 10);
 }
 
 void Graph::move(Vertex * node)
@@ -148,6 +148,7 @@ void Graph::move(Vertex * node)
 	_impkerLocation = _impkerLocation->getParent();
 	_impkerLocation->setImpker(true);
 	std::cout << "De impker verplaats zich naar positie: x= " << _impkerLocation->getX() << " y= " << _impkerLocation->getY() << std::endl;
+	std::cout << "weight: " << _impkerLocation->getF() << std::endl;
 }
 
 std::vector<Vertex*> Graph::getNeighbors(Vertex * current)

@@ -18,15 +18,36 @@ Imker::~Imker()
 
 void Imker::update(GameController * controller)
 {
+	Graph* graph = controller->getGrapth();
 	_behavior->checkState(controller);
 
 	_behavior->update(controller);
 	_catchRadius += 0.333;
+
+	if (_x < graph->getImker()->getX())
+	{
+		setX(_x + 1);
+	}
+	else if (_x > graph->getImker()->getX())
+	{
+		setX(_x - 1);
+	}
+
+	if (_y < graph->getImker()->getY())
+	{
+		setY(_y + 1);
+	}
+	else if (getY() > graph->getImker()->getY())
+	{
+		setY(_y - 1);
+	}
 }
 
 void Imker::draw(SDLFacade * facade)
 {
-	facade->DrawTexture(_texture, _x, _y,52,75);
+	_offsetX = _x;
+	_offsetY = _y - 25;
+	facade->DrawTexture(_texture, _offsetX, _offsetY,52,75);
 	facade->DrawCircle(_x, _y, _catchRadius, false);
 }
 

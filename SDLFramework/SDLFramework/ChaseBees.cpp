@@ -54,26 +54,6 @@ void ChaseBees::update(GameController * controller)
 			_imker->addcatchedBee(bee);
 		}
 	}
-
-	Graph* graph = controller->getGrapth();
-
-	if (_imker->getX() < graph->getImker()->getX())
-	{
-		_imker->setX(_imker->getX() + 1);
-	}
-	else if (_imker->getX() > graph->getImker()->getX())
-	{
-		_imker->setX(_imker->getX() - 1);
-	}
-
-	if (_imker->getY() < graph->getImker()->getY())
-	{
-		_imker->setY(_imker->getY() + 1);
-	}
-	else if (_imker->getY() > graph->getImker()->getY())
-	{
-		_imker->setY(_imker->getY() - 1);
-	}
 }
 
 void ChaseBees::Move(GameController* controller)
