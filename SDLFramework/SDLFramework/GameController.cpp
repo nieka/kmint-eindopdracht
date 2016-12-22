@@ -81,6 +81,9 @@ void GameController::run()
 				case SDLK_SPACE:
 					_imker->move(this);
 					break;
+				case SDLK_b:
+					PrintBeeStats();
+					break;
 				default:
 					break;
 				}
@@ -457,10 +460,33 @@ void GameController::fillGraph()
 void GameController::addBees()
 {
 	Utils utils;
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < _amountBees; i++) {
 		IGameObject* bee = new Bee(_sdlFacade);
 		bee->setX(utils.getRandom(1, 599));
 		bee->setY(utils.getRandom(1, 599));
 		_gameObjecten.push_back(bee);
 	}
+}
+
+void GameController::PrintBeeStats()
+{
+	int topspeed = 0;
+	int detectradius = 0;
+	int fleespeed = 0;
+	int ticksalive = 0;
+	
+	for (IGameObject* o : _gameObjecten)
+	{
+		Bee* b = dynamic_cast<Bee*>(o);
+		topspeed += b->getTopSpeed();
+		detectradius += b->getDetectionRadius();
+		fleespeed += b->FleeSpeed();
+		ticksalive += b->getTickalive();
+	}
+
+	std::cout << "==Bee stats==" << std::endl;
+	std::cout << "topspeed: " << std::to_string(topspeed / _amountBees) << std::endl;
+	std::cout << "detectradius: " << std::to_string(detectradius / _amountBees) << std::endl;
+	std::cout << "fleespeed: " << std::to_string(fleespeed / _amountBees) << std::endl;
+	std::cout << "ticksalive: " << std::to_string(ticksalive / _amountBees) << std::endl;
 }

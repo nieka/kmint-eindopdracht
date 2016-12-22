@@ -4,6 +4,7 @@
 #include "Graph.h"
 #include "IGameObject.h"
 #include "Imker.h"
+#include "string"
 
 
 class Edge;
@@ -20,11 +21,11 @@ public:
 	
 
 private:
+	int _amountBees = 50;
 	void run();
 	void fillGraph();
 	void addBees();
-	
-
+	void PrintBeeStats();
 	SDLFacade* _sdlFacade;
 	Graph* graph;
 
