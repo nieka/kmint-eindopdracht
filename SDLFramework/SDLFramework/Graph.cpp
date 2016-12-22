@@ -35,6 +35,8 @@ void Graph::addEdge(Edge * edge)
 
 void Graph::move(Vertex* start, Vertex* goal)
 {
+	setImpkerGoal(goal);
+
 	if (start != goal)
 	{
 		std::vector<Vertex*> cl;
@@ -87,8 +89,14 @@ void Graph::draw(SDLFacade * facade)
 	}
 
 	//draw all nodes
-	facade->SetColor(Color(0, 0, 255, 255));
 	for (int i = 0; i < nodes.size(); i++) {
+		if (!nodes.at(i)->isImkerGoal()) {
+			facade->SetColor(Color(0, 0, 255, 255));
+		}
+		else {
+			facade->SetColor(Color(255, 0, 0, 255));
+		}
+
 		nodes.at(i)->draw(facade);
 
 		if (nodes.at(i)->hasPowerUP())
@@ -132,6 +140,17 @@ void Graph::setImker(Vertex * loc)
 void Graph::setBase(Vertex * base)
 {
 	_base = base;
+}
+
+void Graph::setImpkerGoal(Vertex * goal)
+{
+	if (_ImpkerGoal != nullptr)
+	{
+		_ImpkerGoal->setImpkerGoal(false);
+	}
+
+	_ImpkerGoal = goal;
+	_ImpkerGoal->setImpkerGoal(true);
 }
 
 int Graph::heuristic(Vertex * start, Vertex * goal)

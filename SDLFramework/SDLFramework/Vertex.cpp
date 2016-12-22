@@ -66,6 +66,16 @@ void Vertex::setPowerUp(bool p)
 	_hasPowerUp = p;
 }
 
+void Vertex::setImpkerGoal(bool g)
+{
+	_imkerGoal = g;
+}
+
+bool Vertex::isImkerGoal() const
+{
+	return _imkerGoal;
+}
+
 int Vertex::getF()
 {
 	return f;
@@ -78,12 +88,15 @@ int Vertex::getG()
 
 void Vertex::draw(SDLFacade* app)
 {
-	app->DrawCircle(getX(), getY(), 5, true);
-
-	if (_hasPowerUp)
+	if (_imkerGoal)
 	{
-		//app->DrawTexture(_x, _y, 50, 50);
+		app->DrawCircle(getX(), getY(), 7, true);
 	}
+	else
+	{
+		app->DrawCircle(getX(), getY(), 5, true);
+	}
+	
 }
 
 std::vector<Edge*> Vertex::getEdges()

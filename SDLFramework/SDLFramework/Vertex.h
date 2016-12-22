@@ -26,6 +26,8 @@ public:
 	void setImpker(bool impker);
 	bool hasPowerUP() const;
 	void setPowerUp(bool p);
+	void setImpkerGoal(bool g);
+	bool isImkerGoal() const;
 private:
 	int _x;
 	int _y;
@@ -34,5 +36,6 @@ private:
 	int g;
 	bool _hasImpker;
 	bool _hasPowerUp;
+	bool _imkerGoal;
 };
 

@@ -21,6 +21,7 @@ public:
 	void setPowerUp(SDLFacade* sdl);
 	void setImker(Vertex* loc);
 	void setBase(Vertex* base);
+	void setImpkerGoal(Vertex* goal);
 
 private:
 	int heuristic(Vertex* start, Vertex* goal);
@@ -29,6 +30,7 @@ private:
 	Vertex* _impkerLocation = nullptr;
 	Vertex* _PowerUp = nullptr;
 	Vertex* _base = nullptr;
+	Vertex* _ImpkerGoal = nullptr;
 
 	SDL_Texture *_pill;
 };
