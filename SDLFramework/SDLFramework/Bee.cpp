@@ -43,7 +43,10 @@ void Bee::update(GameController * controller)
 
 	//acceleration = acceleration.multiply(acceleration, 0);
 
-	_ticksALive++;
+	if (!_catched)
+	{
+		_ticksALive++;
+	}
 }
 
 void Bee::draw(SDLFacade * facade)
@@ -51,7 +54,6 @@ void Bee::draw(SDLFacade * facade)
 	if (!_catched) {
 		facade->DrawTexture(_texture, getX(), getY(), 25, 19);
 	}
-	
 }
 
 void Bee::move(GameController * controller)

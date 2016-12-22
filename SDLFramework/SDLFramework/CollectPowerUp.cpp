@@ -23,6 +23,7 @@ void CollectPowerUp::checkState(GameController * controller)
 	{
 		std::cout << "Behavior: Power Mode!" << std::endl;
 		graph->setPowerUp(controller->getFacade());
+		_imker->deliverbees(controller);
 		_imker->setBehavior(new PowerMode(_imker));
 	}
 }

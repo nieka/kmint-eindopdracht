@@ -20,8 +20,9 @@ public:
 	Imker* getImker() const;
 	SDLFacade* getFacade() const;
 	int getAmountBees() const;
+	void newBees();
 private:
-	int _amountBees = 50;
+	const int _amountBees = 50;
 	void run();
 	void fillGraph();
 	void addBees();

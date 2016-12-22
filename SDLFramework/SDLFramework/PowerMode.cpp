@@ -12,7 +12,6 @@
 PowerMode::PowerMode(Imker * imker)
 {
 	_imker = imker;
-	_imker->deliverbees();
 }
 
 PowerMode::~PowerMode()

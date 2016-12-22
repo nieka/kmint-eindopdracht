@@ -72,6 +72,11 @@ int GameController::getAmountBees() const
 	return _amountBees;
 }
 
+void GameController::newBees()
+{
+	std::cout << "new generation bee's" << std::endl;
+}
+
 void GameController::run()
 {
 	while (_sdlFacade->IsRunning())

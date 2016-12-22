@@ -16,7 +16,7 @@ void GoToBase::checkState(GameController * controller)
 	Graph* graph = controller->getGrapth();
 	if (graph->getImker() == graph->getBase())
 	{
-		_imker->deliverbees();
+		_imker->deliverbees(controller);
 		//TODO evaluatie
 		_imker->setBehavior(new ChaseBees(_imker));
 	}

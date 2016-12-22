@@ -23,7 +23,7 @@ public:
 	std::vector<IGameObject*> getChatchedBees();
 	bool CatchedAllBees(GameController* con) const;
 	void setBehavior(ImkerBehavior* behavior);
-	void deliverbees();
+	void deliverbees(GameController* con);
 protected:
 	ImkerBehavior* _behavior;
 	float _catchRadius;

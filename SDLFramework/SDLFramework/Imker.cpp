@@ -108,7 +108,7 @@ void Imker::setBehavior(ImkerBehavior * behavior)
 	_behavior = behavior;
 }
 
-void Imker::deliverbees()
+void Imker::deliverbees(GameController* con)
 {
 	for (IGameObject* b : _catchedBees)
 	{
@@ -116,4 +116,9 @@ void Imker::deliverbees()
 	}
 
 	_catchedBees.clear();
+
+	if (_beesInBase.size() == con->getAmountBees())
+	{
+		con->newBees();
+	}
 }
