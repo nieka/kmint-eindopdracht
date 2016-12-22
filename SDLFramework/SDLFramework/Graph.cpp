@@ -125,7 +125,14 @@ Vertex * Graph::getBase()
 
 void Graph::setPowerUp(SDLFacade* sdl)
 {
-	_pill = sdl->LoadTexture("pill.png");
+	if (_PowerUp == nullptr)
+	{
+		_pill = sdl->LoadTexture("pill.png");
+	}
+	else
+	{
+		_PowerUp->setPowerUp(false);
+	}
 
 	srand(time(NULL));
 	_PowerUp = nodes[(rand() % nodes.size())];

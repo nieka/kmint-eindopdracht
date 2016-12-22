@@ -18,7 +18,7 @@ public:
 	std::vector<IGameObject*> getGameobjecten() const;
 	Graph* getGrapth();
 	Imker* getImker() const;
-	
+	SDLFacade* getFacade() const;
 
 private:
 	int _amountBees = 50;

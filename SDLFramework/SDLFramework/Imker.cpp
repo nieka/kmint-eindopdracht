@@ -7,6 +7,7 @@ Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
 	_behavior = new CollectPowerUp(this);
+	//_behavior = new ChaseBees(this);
 	_catchRadius = 100;
 }
 

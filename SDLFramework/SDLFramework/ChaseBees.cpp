@@ -8,6 +8,8 @@
 #include "CollectPowerUp.h"
 #include "Panic.h"
 #include "GoToBase.h"
+#include "string"
+#include "Iostream"
 
 class GameController;
 
@@ -29,12 +31,15 @@ void ChaseBees::checkState(GameController * controller)
 		int value = utils.getRandom(0, 100);
 		int derde = 100 / 3;
 		if (value <= derde) {
+			std::cout << "behaviour: Collect Power up" << std::endl;
 			_imker->setBehavior(new CollectPowerUp(_imker));
 		}
 		else if (value <= derde * 2) {
+			std::cout << "behaviour: Go to Base" << std::endl;
 			_imker->setBehavior(new GoToBase(_imker));
 		}
 		else {
+			std::cout << "behaviour: Panic" << std::endl;
 			_imker->setBehavior(new Panic(_imker));
 		}
 	}
@@ -52,6 +57,8 @@ void ChaseBees::update(GameController * controller)
 		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced()) {
 			bee->setCathced(true);
 			_imker->addcatchedBee(bee);
+			std::cout << "Catched a bee" << std::endl;
+			std::cout << "Bee's: " << std::to_string(_imker->getChatchedBees().size()) << std::endl;
 		}
 	}
 }
@@ -59,5 +66,6 @@ void ChaseBees::update(GameController * controller)
 void ChaseBees::Move(GameController* controller)
 {
 	Graph* graph = controller->getGrapth();
+	//TODO calculate closest bee
 
 }

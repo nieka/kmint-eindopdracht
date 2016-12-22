@@ -41,6 +41,7 @@
     <ClCompile Include="GoToBase.cpp">
       <Filter>Source\ImkerBehavior</Filter>
     </ClCompile>
+    <ClCompile Include="PowerMode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
@@ -87,6 +88,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="GoToBase.h">
+      <Filter>Header\ImkerBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerMode.h">
       <Filter>Header\ImkerBehavior</Filter>
     </ClInclude>
   </ItemGroup>

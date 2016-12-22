@@ -62,6 +62,11 @@ Imker* GameController::getImker() const
 	return _imker;
 }
 
+SDLFacade * GameController::getFacade() const
+{
+	return _sdlFacade;
+}
+
 void GameController::run()
 {
 	while (_sdlFacade->IsRunning())
