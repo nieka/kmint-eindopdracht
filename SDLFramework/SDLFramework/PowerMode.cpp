@@ -12,6 +12,7 @@
 PowerMode::PowerMode(Imker * imker)
 {
 	_imker = imker;
+	_imker->deliverbees();
 }
 
 PowerMode::~PowerMode()
@@ -20,7 +21,7 @@ PowerMode::~PowerMode()
 
 void PowerMode::checkState(GameController * controller)
 {
-	if (_imker->getChatchedBees().size() == 30) {
+	if (_imker->getChatchedBees().size() == 30 || _imker->CatchedAllBees(controller)) {
 		_imker->setBehavior(new GoToBase(_imker));
 	}
 }

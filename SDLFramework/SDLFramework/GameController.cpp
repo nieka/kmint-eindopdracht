@@ -53,7 +53,7 @@ std::vector<IGameObject*> GameController::getGameobjecten() const
 }
 
 
-Graph* GameController::getGrapth()
+Graph* GameController::getGrapth() const
 {
 	return graph;
 }
@@ -65,6 +65,11 @@ Imker* GameController::getImker() const
 SDLFacade * GameController::getFacade() const
 {
 	return _sdlFacade;
+}
+
+int GameController::getAmountBees() const
+{
+	return _amountBees;
 }
 
 void GameController::run()

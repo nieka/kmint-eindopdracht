@@ -25,7 +25,7 @@ ChaseBees::~ChaseBees()
 
 void ChaseBees::checkState(GameController * controller)
 {
-	if (_imker->getChatchedBees().size() == 10) {
+	if (_imker->getChatchedBees().size() == 10 || _imker->CatchedAllBees(controller)) {
 		//verander state
 		Utils utils;
 		int value = utils.getRandom(0, 100);

@@ -6,8 +6,8 @@
 Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
-	_behavior = new CollectPowerUp(this);
-	//_behavior = new ChaseBees(this);
+	//_behavior = new CollectPowerUp(this);
+	_behavior = new ChaseBees(this);
 	_catchRadius = 100;
 }
 
@@ -92,8 +92,28 @@ std::vector<IGameObject*> Imker::getChatchedBees()
 	return _catchedBees;
 }
 
+bool Imker::CatchedAllBees(GameController* con) const
+{
+	if (_catchedBees.size() + _beesInBase.size() == con->getAmountBees())
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void Imker::setBehavior(ImkerBehavior * behavior)
 {
 	delete _behavior;
 	_behavior = behavior;
+}
+
+void Imker::deliverbees()
+{
+	for (IGameObject* b : _catchedBees)
+	{
+		_beesInBase.push_back(b);
+	}
+
+	_catchedBees.clear();
 }

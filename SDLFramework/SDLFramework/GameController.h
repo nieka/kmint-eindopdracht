@@ -16,10 +16,10 @@ public:
 	~GameController();
 	void initialize();
 	std::vector<IGameObject*> getGameobjecten() const;
-	Graph* getGrapth();
+	Graph* getGrapth() const;
 	Imker* getImker() const;
 	SDLFacade* getFacade() const;
-
+	int getAmountBees() const;
 private:
 	int _amountBees = 50;
 	void run();
