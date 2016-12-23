@@ -5,6 +5,7 @@
 #include <set>
 #include <iostream>
 #include <time.h> 
+#include "Vector2D.h"
 
 struct compare
 {
@@ -158,6 +159,30 @@ void Graph::setImpkerGoal(Vertex * goal)
 
 	_ImpkerGoal = goal;
 	_ImpkerGoal->setImpkerGoal(true);
+}
+
+Vertex * Graph::getVertexAt(int x, int y)
+{
+	int minDist = 60000;
+	Vertex* closedVertex = nodes.at(0);
+	Vector2D targetlocation;
+	targetlocation.setX(x);
+	targetlocation.sety(y);
+
+	for each (Vertex* vertex in nodes)
+	{
+		Vector2D nodeLocation;
+		nodeLocation.setX(vertex->getX());
+		nodeLocation.sety(vertex->getY());
+
+		if (nodeLocation.dist(nodeLocation, targetlocation) < minDist) {
+			minDist = nodeLocation.dist(nodeLocation, targetlocation);
+			closedVertex = vertex;
+		}
+	}
+
+
+	return closedVertex;
 }
 
 int Graph::heuristic(Vertex * start, Vertex * goal)

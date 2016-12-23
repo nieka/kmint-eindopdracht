@@ -22,6 +22,7 @@ public:
 	void setImker(Vertex* loc);
 	void setBase(Vertex* base);
 	void setImpkerGoal(Vertex* goal);
+	Vertex* getVertexAt(int x, int y);
 
 private:
 	int heuristic(Vertex* start, Vertex* goal);

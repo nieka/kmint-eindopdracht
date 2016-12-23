@@ -54,7 +54,7 @@ void ChaseBees::update(GameController * controller)
 
 	for each (Bee* bee in controller->getGameobjecten())
 	{
-		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced()) {
+		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced() && _imker->getChatchedBees().size() <= 10) {
 			bee->setCathced(true);
 			_imker->addcatchedBee(bee);
 			std::cout << "Catched a bee" << std::endl;
@@ -66,6 +66,19 @@ void ChaseBees::update(GameController * controller)
 void ChaseBees::Move(GameController* controller)
 {
 	Graph* graph = controller->getGrapth();
-	//TODO calculate closest bee
+	Vector2D imkerPos;
+	imkerPos.setX(_imker->getX());
+	imkerPos.sety(_imker->getY());
+	Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
+	int closedBee = 60000;
 
+	for each (Bee* bee in controller->getGameobjecten())
+	{
+		if (imkerPos.dist(imkerPos, bee->getPosition()) < closedBee) {
+			target = bee;
+			closedBee = imkerPos.dist(imkerPos, bee->getPosition());
+		}
+	}
+
+	graph->move(graph->getImker(), graph->getVertexAt(target->getX(), target->getY()));
 }

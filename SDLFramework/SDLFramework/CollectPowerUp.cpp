@@ -11,7 +11,6 @@ CollectPowerUp::CollectPowerUp(Imker* imker)
 	_imker = imker;
 }
 
-
 CollectPowerUp::~CollectPowerUp()
 {
 }
