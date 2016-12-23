@@ -2,6 +2,8 @@
 #include "IGameObject.h"
 #include "IIMkerBehavior.h"
 #include <vector>
+#include "Graph.h"
+
 class Imker :
 	public IGameObject
 {
@@ -12,7 +14,7 @@ public:
 	void update(GameController* controller) override;
 	void draw(SDLFacade* facade) override;
 	void move(GameController* controller) override;
-
+	void imkerMovement(Graph& graph);
 	//getters and setters
 	void setX(int x) override;
 	void setY(int y) override;
