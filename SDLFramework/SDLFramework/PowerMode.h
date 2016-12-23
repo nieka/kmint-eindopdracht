@@ -1,6 +1,7 @@
 #pragma once
 #include "IIMkerBehavior.h"
 #include "Utils.h"
+#include "Vertex.h"
 
 class PowerMode :
 	public ImkerBehavior
@@ -15,4 +16,5 @@ public:
 
 private:
 	Utils utils;
+	Vertex* _targetPos = nullptr;
 };

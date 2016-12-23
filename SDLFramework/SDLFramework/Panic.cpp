@@ -3,6 +3,7 @@
 #include "GoToBase.h"
 #include "Graph.h"
 #include "GameController.h"
+#include "Bee.h"
 
 Panic::Panic(Imker* imker)
 {
@@ -30,6 +31,38 @@ void Panic::update(GameController * controller)
 
 void Panic::Move(GameController * controller)
 {
-	Graph* graph= controller->getGrapth();
-	graph->move(graph->getImker(), graph->nodes.at(utils.getRandom(0, graph->nodes.size())));
+	Graph* graph = controller->getGrapth();
+	if (_targetPos == graph->getImker() || _targetPos == nullptr) {
+		Vector2D imkerPos;
+		imkerPos.setX(_imker->getX());
+		imkerPos.sety(_imker->getY());
+		Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
+		int distanceToBee = 0;
+
+		for each (Bee* bee in controller->getGameobjecten())
+		{
+			if (imkerPos.dist(imkerPos, bee->getPosition()) > distanceToBee) {
+				target = bee;
+				distanceToBee = imkerPos.dist(imkerPos, bee->getPosition());
+			}
+		}
+
+		Vector2D targetVector;
+		if (target->getX() < 300) {
+			targetVector.setX(600);
+		}
+		else {
+			targetVector.setX(0);
+		}
+		targetVector.sety(target->getY());
+		
+		_targetPos = graph->getVertexAt(targetVector.getX(), targetVector.getY());
+
+		graph->move(graph->getImker(), _targetPos);
+	}
+	else {
+		graph->move(graph->getImker(), _targetPos);
+	}
+	
+	
 }

@@ -46,19 +46,24 @@ void PowerMode::update(GameController * controller)
 void PowerMode::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	Vector2D imkerPos;
-	imkerPos.setX(_imker->getX());
-	imkerPos.sety(_imker->getY());
-	Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
-	int closedBee = 60000;
+	if (_targetPos == graph->getImker() || _targetPos == nullptr) {
+		Vector2D imkerPos;
+		imkerPos.setX(_imker->getX());
+		imkerPos.sety(_imker->getY());
+		Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
+		int closedBee = 60000;
 
-	for each (Bee* bee in controller->getGameobjecten())
-	{
-		if (imkerPos.dist(imkerPos, bee->getPosition()) < closedBee) {
-			target = bee;
-			closedBee = imkerPos.dist(imkerPos, bee->getPosition());
+		for each (Bee* bee in controller->getGameobjecten())
+		{
+			if (imkerPos.dist(imkerPos, bee->getPosition()) < closedBee) {
+				target = bee;
+				closedBee = imkerPos.dist(imkerPos, bee->getPosition());
+			}
 		}
+		_targetPos = graph->getVertexAt(target->getX(), target->getY());
+		graph->move(graph->getImker(), _targetPos);
 	}
-
-	graph->move(graph->getImker(), graph->getVertexAt(target->getX(), target->getY()));
+	else {
+		graph->move(graph->getImker(), _targetPos);
+	}
 }
