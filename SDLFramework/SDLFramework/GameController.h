@@ -33,6 +33,7 @@ private:
 	std::vector<IGameObject*> _gameObjecten;
 	Imker* _imker;
 	SDL_Texture *_background;
+	bool _speedMode;
 
 };
 

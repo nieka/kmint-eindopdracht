@@ -11,6 +11,7 @@ GameController::GameController()
 	_sdlFacade = new SDLFacade();
 	graph = new Graph;
 	_background = _sdlFacade->LoadTexture("map.png");
+	_speedMode = false;
 	
 }
 
@@ -99,6 +100,14 @@ void GameController::run()
 				case SDLK_b:
 					PrintBeeStats();
 					break;
+				case SDLK_s:
+					if (_speedMode) {
+						_speedMode = false;
+					}
+					else {
+						_speedMode = true;
+					}
+					break;
 				default:
 					break;
 				}
@@ -111,12 +120,30 @@ void GameController::run()
 		graph->draw(_sdlFacade);
 
 		for (int i = 0; i < _gameObjecten.size(); i++) {
-			_gameObjecten.at(i)->update(this);
-			_gameObjecten.at(i)->draw(_sdlFacade);
+			if (_speedMode) {
+				for (int i = 0; i < 10; i++) {
+					_gameObjecten.at(i)->update(this);
+					_gameObjecten.at(i)->draw(_sdlFacade);
+				}
+			}
+			else {
+				_gameObjecten.at(i)->update(this);
+				_gameObjecten.at(i)->draw(_sdlFacade);
+			}
+			
 		}
 
-		_imker->update(this);
-		_imker->draw(_sdlFacade);
+		if (_speedMode) {
+			for (int i = 0; i < 10; i++) {
+				_imker->update(this);
+				_imker->draw(_sdlFacade);
+			}
+		}
+		else {
+			_imker->update(this);
+			_imker->draw(_sdlFacade);
+		}
+		
 		
 		_sdlFacade->EndTick();
 	}
