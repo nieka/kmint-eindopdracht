@@ -135,6 +135,6 @@ void Imker::deliverbees(GameController* con)
 
 	if (_beesInBase.size() == con->getAmountBees())
 	{
-		con->newBees();
+		con->newGeneration();
 	}
 }

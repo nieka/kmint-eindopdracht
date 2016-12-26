@@ -7,6 +7,7 @@ class Bee :
 {
 public:
 	Bee(SDLFacade * facade);
+	Bee(SDLFacade* facade, int topspeed, int detection, int flee);
 	~Bee();
 
 	void update(GameController* controller) override;

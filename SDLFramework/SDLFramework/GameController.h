@@ -5,6 +5,8 @@
 #include "IGameObject.h"
 #include "Imker.h"
 #include "string"
+#include <iostream>
+#include <random>
 
 
 class Edge;
@@ -20,12 +22,13 @@ public:
 	Imker* getImker() const;
 	SDLFacade* getFacade() const;
 	int getAmountBees() const;
-	void newBees();
+	void newGeneration();
 private:
 	const int _amountBees = 50;
 	void run();
 	void fillGraph();
-	void addBees();
+	void firstBees();
+	void newBee(IGameObject* BeeA, IGameObject* BeeB);
 	void PrintBeeStats();
 	SDLFacade* _sdlFacade;
 	Graph* graph;
