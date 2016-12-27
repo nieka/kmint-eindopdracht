@@ -3,6 +3,7 @@
 #include "IIMkerBehavior.h"
 #include <vector>
 #include "Graph.h"
+#include "Bee.h"
 
 class Imker :
 	public IGameObject
@@ -26,6 +27,7 @@ public:
 	bool CatchedAllBees(GameController* con) const;
 	void setBehavior(ImkerBehavior* behavior);
 	void deliverbees(GameController* con);
+	void releaseBee();
 protected:
 	ImkerBehavior* _behavior;
 	float _catchRadius;

@@ -135,6 +135,18 @@ void Imker::deliverbees(GameController* con)
 
 	if (_beesInBase.size() == con->getAmountBees())
 	{
+		_catchRadius = 100;
 		con->newGeneration();
+	}
+}
+
+void Imker::releaseBee()
+{
+	if (_catchedBees.size() != 0)
+	{
+		IGameObject* r = _catchedBees[(_catchedBees.size() - 1)];
+		Bee* b = dynamic_cast<Bee*>(r);
+		b->setCathced(false);
+		_catchedBees.pop_back();
 	}
 }

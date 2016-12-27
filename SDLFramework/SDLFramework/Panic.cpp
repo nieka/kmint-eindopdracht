@@ -25,7 +25,7 @@ void Panic::checkState(GameController * controller)
 void Panic::update(GameController * controller)
 {
 	if (utils.getRandom(0, 10) < 3) {
-		_imker->getChatchedBees().pop_back();
+		_imker->releaseBee();
 	}
 }
 

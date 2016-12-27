@@ -75,6 +75,37 @@ int GameController::getAmountBees() const
 
 void GameController::newGeneration()
 {
+	//place the bee's in oldgeneration 
+	//and remove the bee's from the gameobjects vector for safe deletion.
+	std::vector<Bee*> oldGeneration;
+
+	for (int i = 0; i < _gameObjecten.size(); ++i)
+	{
+		oldGeneration.push_back(dynamic_cast<Bee*>(_gameObjecten[i]));
+	}
+
+	_gameObjecten.clear();
+	
+
+
+
+
+
+
+
+
+	for (Bee* b : oldGeneration)
+	{
+		delete b;
+	}
+
+	//print bee's ticks alive
+	for (int i = 0; i < _amountBees; ++i)
+	{
+		Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
+		std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
+	}
+
 }
 
 void GameController::run()
