@@ -44,7 +44,6 @@ void GameController::initialize()
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
 		firstBees();
-		newBee(_gameObjecten[0], _gameObjecten[1]);
 		run();
 	}
 }
@@ -512,16 +511,14 @@ void GameController::firstBees()
 
 void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 {
+	//converting gameobjects to bee's
 	Bee* a = dynamic_cast<Bee*>(beeA);
 	Bee* b = dynamic_cast<Bee*>(beeB);
 
 	std::random_device rd;     
 	std::mt19937 rng(rd());    
-	std::uniform_int_distribution<int> h(0, 2);
-	std::uniform_int_distribution<int> m(0, 1000);
-	int slice = h(rng);
-	int mutate = m(rng);
 
+	//bee's infomation
 	std::vector<int> ba;
 	ba.push_back(a->getTopSpeed());
 	ba.push_back(a->getDetectionRadius());
@@ -534,6 +531,10 @@ void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 
 	std::vector<int> newbee;
 
+	//creating new bee
+	std::uniform_int_distribution<int> h(0, 2);
+	int slice = h(rng);
+
 	for (int i = 0; i < slice; ++i)
 	{
 		newbee.push_back(ba[i]);
@@ -544,11 +545,28 @@ void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 		newbee.push_back(bb[j]);
 	}
 
-	if (mutate == 1)
+	
+	//mutation
+	std::uniform_int_distribution<int> mutateChance(0, 1000);
+
+	if (mutateChance(rng) == 1)
 	{
-		//setrandom value
+		std::uniform_int_distribution<int> ml(0, 2);
+		int mutateLocation = ml(rng);
+
+		if (mutateLocation == 1)
+		{
+			std::uniform_int_distribution<int> r(0, 200);
+			newbee[1] = r(rng);
+		}
+		else
+		{
+			std::uniform_int_distribution<int> r(0, 10);
+			newbee[mutateLocation] = r(rng);
+		}
 	}
 
+	//bee added to gameobjects
 	_gameObjecten.push_back(new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]));
 }
 
