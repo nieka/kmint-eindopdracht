@@ -44,6 +44,7 @@ void GameController::initialize()
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
 		firstBees();
+		//newGeneration();
 		run();
 	}
 }
@@ -87,6 +88,42 @@ void GameController::newGeneration()
 	_gameObjecten.clear();
 	
 
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> bee(0, _amountBees - 1); // random number for selecting bee
+	std::uniform_int_distribution<int> float1(0, 4);
+	std::uniform_int_distribution<int> float2(0, 9);
+
+	while (_gameObjecten.size() <= _amountBees)
+	{
+		Bee* b1 = nullptr;
+		Bee* b2 = nullptr;
+
+		while (b2 == nullptr)
+		{
+			int randombee = bee(rng);
+			Bee* b = dynamic_cast<Bee*>(oldGeneration.at(randombee));
+			float chance = (float)b->getTickalive() / 500;
+			float modifyer = float1(rng) + ((float)float2(rng) / 10);
+
+ 			if (chance + modifyer >= 5)
+			{
+				if (b1 == nullptr)
+				{
+					b1 = b;
+				}
+				else
+				{
+					b2 = b;
+				}
+			}
+
+			if (b2 != nullptr)
+			{
+				newBee(b1, b2);
+			}
+		}
+	}
 
 
 

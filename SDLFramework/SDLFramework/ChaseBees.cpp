@@ -25,21 +25,29 @@ ChaseBees::~ChaseBees()
 
 void ChaseBees::checkState(GameController * controller)
 {
-	if (_imker->getChatchedBees().size() == 10 || _imker->CatchedAllBees(controller)) {
+	if (_imker->getChatchedBees().size() >= 10 || _imker->CatchedAllBees(controller)) {
 		//verander state
 		Utils utils;
-		int value = utils.getRandom(0, 100);
-		if (value <= _imker->getCollectPowerUp()) {
-			std::cout << "behaviour: Collect Power up" << std::endl;
-			_imker->setBehavior(new CollectPowerUp(_imker));
-		}
-		else if (value <= _imker->getReturnToBase()) {
-			std::cout << "behaviour: Go to Base" << std::endl;
+
+		if (_imker->CatchedAllBees(controller))
+		{
 			_imker->setBehavior(new GoToBase(_imker, "chasebees"));
 		}
-		else {
-			std::cout << "behaviour: Panic" << std::endl;
-			_imker->setBehavior(new Panic(_imker));
+		else
+		{
+			int value = utils.getRandom(0, 100);
+			if (value <= _imker->getCollectPowerUp()) {
+				std::cout << "behaviour: Collect Power up" << std::endl;
+				_imker->setBehavior(new CollectPowerUp(_imker));
+			}
+			else if (value <= _imker->getReturnToBase()) {
+				std::cout << "behaviour: Go to Base" << std::endl;
+				_imker->setBehavior(new GoToBase(_imker, "chasebees"));
+			}
+			else {
+				std::cout << "behaviour: Panic" << std::endl;
+				_imker->setBehavior(new Panic(_imker));
+			}
 		}
 	}
 }
