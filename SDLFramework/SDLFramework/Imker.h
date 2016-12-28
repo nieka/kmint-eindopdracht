@@ -28,6 +28,10 @@ public:
 	void setReturnToBase(int v);
 	void setCollectPowerUp(int v);
 	void setPanic(int v);
+	int getTicks() const;
+	void setTicks(int tick);
+	float getAverage() const;
+	void setAverage(float a);
 	void addcatchedBee(IGameObject* bee);
 	std::vector<IGameObject*> getChatchedBees();
 	bool CatchedAllBees(GameController* con) const;
@@ -40,6 +44,8 @@ protected:
 	int _returnToBase = 33;
 	int _collectPowerUp = 33;
 	int _panic = 33;
+	int TimeTicks = 0;
+	float average = 1;
 	std::vector<IGameObject*> _catchedBees;
 	std::vector<IGameObject*> _beesInBase;
 };

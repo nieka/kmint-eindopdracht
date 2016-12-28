@@ -34,6 +34,8 @@ void Imker::update(GameController * controller)
 	//}
 
 	//imkerMovement(*graph);
+
+	TimeTicks++;
 }
 
 	
@@ -127,6 +129,26 @@ void Imker::setCollectPowerUp(int v)
 void Imker::setPanic(int v)
 {
 	_panic = v;
+}
+
+int Imker::getTicks() const
+{
+	return TimeTicks;
+}
+
+void Imker::setTicks(int tick)
+{
+	TimeTicks = tick;
+}
+
+float Imker::getAverage() const
+{
+	return average;
+}
+
+void Imker::setAverage(float a)
+{
+	average = a;
 }
 
 void Imker::addcatchedBee(IGameObject * bee)

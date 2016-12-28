@@ -19,6 +19,11 @@ void GoToBase::checkState(GameController * controller)
 	if (graph->getImker() == graph->getBase())
 	{
 		reflection();
+		std::cout << "== FSM ==" << std::endl;
+		std::cout << "return to base: " << std::to_string(_imker->getReturnToBase()) << std::endl;
+		std::cout << "collect power up: " << std::to_string(_imker->getCollectPowerUp()) << std::endl;
+		std::cout << "panic: " << std::to_string(100 - (_imker->getReturnToBase() + _imker->getCollectPowerUp())) << std::endl;
+		std::cout << "average: " << std::to_string(_imker->getAverage()) << std::endl;
 		_imker->deliverbees(controller);
 		_imker->setBehavior(new ChaseBees(_imker));
 	}
@@ -50,52 +55,116 @@ void GoToBase::Move(GameController * controller)
 
 void GoToBase::reflection()
 {
+	float effency = (float)_imker->getChatchedBees().size() / (float)_imker->getTicks();
+	std::cout << "effency: " << std::to_string(effency) << std::endl;
 	//evaluatie
-	if (_imker->getChatchedBees().size() > 0)
+	if (_lastState == "chasingbees") // chasing bees
 	{
-		if (_lastState == "chasingbees") // chasing bees
+		if (effency > _imker->getAverage())
 		{
-			if (_imker->getReturnToBase() < 40)
+			if (_imker->getReturnToBase() != 40)
 			{
 				_imker->setReturnToBase(_imker->getReturnToBase() + 3);
+				_imker->setAverage((effency + _imker->getAverage()) / 2);
 				if (_imker->getReturnToBase() > 40)
 				{
 					_imker->setReturnToBase(40);
 				}
 			}
 		}
-		else if (_lastState == "powermode") // powermode
+		else
 		{
-			if (_imker->getCollectPowerUp() < 40)
+			if (_imker->getReturnToBase() != 20)
+			{
+				_imker->setReturnToBase(_imker->getReturnToBase() - 3);
+
+				if (_imker->getReturnToBase() < 20)
+				{
+					_imker->setReturnToBase(20);
+				}
+			}
+		}
+	}
+	else if (_lastState == "powermode") // powermode
+	{
+		if (effency > _imker->getAverage())
+		{
+			if (_imker->getCollectPowerUp() != 40)
 			{
 				_imker->setCollectPowerUp(_imker->getCollectPowerUp() + 3);
+				_imker->setAverage((effency + _imker->getAverage()) / 2);
 				if (_imker->getCollectPowerUp() > 40)
 				{
 					_imker->setCollectPowerUp(40);
 				}
 			}
 		}
+		else
+		{
+			if (_imker->getCollectPowerUp() != 20)
+			{
+				_imker->setCollectPowerUp(_imker->getCollectPowerUp() - 3);
+
+				if (_imker->getCollectPowerUp() < 20)
+				{
+					_imker->setCollectPowerUp(20);
+				}
+			}
+		}
 	}
 	else // panic mode
 	{
-		//als de imker geen bijen heeft gevangen en panic mode heeft gehad 
-		//dan verhoogt hij de kans van zowel powermode als return to base zodat de kans van panic mode lager wordt.
-		if (_imker->getReturnToBase() < 40)
+		//return to base
+		if (effency < _imker->getAverage())
 		{
-			_imker->setReturnToBase(_imker->getReturnToBase() + 3);
-			if (_imker->getReturnToBase() > 40)
+			if (_imker->getReturnToBase() != 40)
 			{
-				_imker->setReturnToBase(40);
+				_imker->setReturnToBase(_imker->getReturnToBase() + 3);
+
+				if (_imker->getReturnToBase() > 40)
+				{
+					_imker->setReturnToBase(40);
+				}
 			}
 		}
-
-		if (_imker->getCollectPowerUp() < 40)
+		else
 		{
-			_imker->setCollectPowerUp(_imker->getCollectPowerUp() + 3);
-			if (_imker->getCollectPowerUp() > 40)
+			if (_imker->getReturnToBase() != 20)
 			{
-				_imker->setCollectPowerUp(40);
+				_imker->setReturnToBase(_imker->getReturnToBase() - 3);
+
+				if (_imker->getReturnToBase() < 20)
+				{
+					_imker->setReturnToBase(20);
+				}
+			}
+		}
+		//collectpowerup
+		if (effency < _imker->getAverage())
+		{
+			if (_imker->getCollectPowerUp() != 40)
+			{
+				_imker->setCollectPowerUp(_imker->getCollectPowerUp() + 3);
+
+				if (_imker->getCollectPowerUp() > 40)
+				{
+					_imker->setCollectPowerUp(40);
+				}
+			}
+		}
+		else
+		{
+			if (_imker->getCollectPowerUp() != 20)
+			{
+				_imker->setCollectPowerUp(_imker->getCollectPowerUp() - 3);
+
+				if (_imker->getCollectPowerUp() < 20)
+				{
+					_imker->setCollectPowerUp(20);
+				}
 			}
 		}
 	}
+
+	
 }
