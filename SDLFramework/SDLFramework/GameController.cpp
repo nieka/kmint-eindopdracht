@@ -74,6 +74,9 @@ int GameController::getAmountBees() const
 
 void GameController::newGeneration()
 {
+	std::cout << "== old generation ==" << std::endl;
+	PrintBeeStats();
+
 	//place the bee's in oldgeneration 
 	//and remove the bee's from the gameobjects vector for safe deletion.
 	std::vector<Bee*> oldGeneration;
@@ -84,7 +87,6 @@ void GameController::newGeneration()
 	}
 
 	_gameObjecten.clear();
-	
 
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
@@ -128,13 +130,8 @@ void GameController::newGeneration()
 		delete b;
 	}
 
-	//print bee's ticks alive
-	//for (int i = 0; i < _amountBees; ++i)
-	//{
-	//	Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
-	//	std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
-	//}
-
+	std::cout << "== new generation ==" << std::endl;
+	PrintBeeStats();
 }
 
 void GameController::run()
