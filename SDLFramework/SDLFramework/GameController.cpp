@@ -84,14 +84,6 @@ void GameController::newGeneration()
 	}
 
 	_gameObjecten.clear();
-	
-
-
-
-
-
-
-
 
 	for (Bee* b : oldGeneration)
 	{
@@ -105,6 +97,7 @@ void GameController::newGeneration()
 		std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
 	}
 
+	PrintBeeStats();
 }
 
 void GameController::run()
