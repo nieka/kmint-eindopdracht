@@ -147,32 +147,30 @@ void GameController::run()
 		_sdlFacade->DrawTexture(_background, 0, 0);
 		
 		graph->draw(_sdlFacade);
-
-		for (int i = 0; i < _gameObjecten.size(); i++) {
-			if (_speedMode) {
-				for (int i = 0; i < 10; i++) {
+		if (_speedMode) {
+			for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < _gameObjecten.size(); i++) {
 					_gameObjecten.at(i)->update(this);
-					_gameObjecten.at(i)->draw(_sdlFacade);
 				}
+				
+				_imker->update(this);
+				_imker->move(this);
+				
 			}
-			else {
+			for (int i = 0; i < _gameObjecten.size(); i++) {
+				_gameObjecten.at(i)->draw(_sdlFacade);
+			}
+			_imker->draw(_sdlFacade);
+		}
+		else {
+			for (int i = 0; i < _gameObjecten.size(); i++) {
 				_gameObjecten.at(i)->update(this);
 				_gameObjecten.at(i)->draw(_sdlFacade);
 			}
-			
-		}
 
-		if (_speedMode) {
-			for (int i = 0; i < 10; i++) {
-				_imker->update(this);
-				_imker->draw(_sdlFacade);
-				_imker->move(this);
-			}
-		}
-		else {
 			_imker->update(this);
-			_imker->draw(_sdlFacade);
 			_imker->move(this);
+			_imker->draw(_sdlFacade);
 		}
 		
 		
