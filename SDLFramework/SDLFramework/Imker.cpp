@@ -8,7 +8,6 @@
 Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
-	//_behavior = new CollectPowerUp(this);
 	_behavior = new ChaseBees(this);
 	_catchRadius = 100;
 }
@@ -28,13 +27,13 @@ void Imker::update(GameController * controller)
 	_catchRadius += 0.333;
 
 
-	if (dynamic_cast<PowerMode*>(_behavior) != NULL)
-	{
-		imkerMovement(*graph);
-		imkerMovement(*graph);
-	}
+	//if (dynamic_cast<PowerMode*>(_behavior) != NULL)
+	//{
+	//	imkerMovement(*graph);
+	//	imkerMovement(*graph);
+	//}
 
-	imkerMovement(*graph);
+	//imkerMovement(*graph);
 }
 
 	
@@ -44,7 +43,9 @@ void Imker::draw(SDLFacade * facade)
 	_offsetX = _x;
 	_offsetY = _y - 25;
 	facade->DrawTexture(_texture, _offsetX, _offsetY,52,75);
+	facade->SetColor(Color(225,225, 225, 225));
 	facade->DrawCircle(_x, _y, _catchRadius, false);
+
 }
 
 void Imker::move(GameController* controller)

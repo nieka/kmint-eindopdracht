@@ -4,6 +4,7 @@
 GoToBase::GoToBase(Imker* imker, std::string laststate)
 {
 	_imker = imker;
+	moveSteps.clear();
 	_lastState = laststate;
 }
 
@@ -16,7 +17,7 @@ void GoToBase::checkState(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
 	if (graph->getImker() == graph->getBase())
-	{	
+	{
 		reflection();
 		_imker->deliverbees(controller);
 		_imker->setBehavior(new ChaseBees(_imker));
@@ -30,7 +31,21 @@ void GoToBase::update(GameController * controller)
 void GoToBase::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	graph->move(graph->getImker(), graph->getBase());
+	if (canMove(graph)) {
+		if (moveSteps.size() == 0) {
+			moveSteps = graph->move(graph->getImker(), graph->getBase());
+			graph->setImpkerGoal(graph->getBase());
+		}
+		else {
+			Vertex* loc = moveSteps.at(0);
+			loc->setImpker(true);
+			graph->setImker(loc);
+			moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
+		}
+	}
+	else {
+		imkerMovement(*graph);
+	}	
 }
 
 void GoToBase::reflection()

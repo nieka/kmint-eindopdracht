@@ -39,8 +39,7 @@ void GameController::initialize()
 		_sdlFacade->SetColor(Color(255, 10, 40, 255));
 
 		_imker = new Imker(_sdlFacade);
-
-
+	
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
 		firstBees();
@@ -204,11 +203,13 @@ void GameController::run()
 			for (int i = 0; i < 10; i++) {
 				_imker->update(this);
 				_imker->draw(_sdlFacade);
+				_imker->move(this);
 			}
 		}
 		else {
 			_imker->update(this);
 			_imker->draw(_sdlFacade);
+			_imker->move(this);
 		}
 		
 		
@@ -340,7 +341,6 @@ void GameController::fillGraph()
 	graph->addVertex(vertex162);
 	auto vertex163 = new Vertex(13, 187);
 	graph->addVertex(vertex163);
-
 	auto vertex164 = new Vertex(144, 267);
 	graph->addVertex(vertex164);
 	auto vertex165 = new Vertex(16, 357);
@@ -420,6 +420,7 @@ void GameController::fillGraph()
 	auto vertex202 = new Vertex(238, 237);
 	graph->addVertex(vertex202);
 	auto vertex203 = new Vertex(211, 219);
+	graph->addVertex(vertex203);
 	auto vertex204 = new Vertex(352, 577);
 	graph->addVertex(vertex204);
 	auto vertex205 = new Vertex(261, 529);
@@ -428,10 +429,6 @@ void GameController::fillGraph()
 	graph->addVertex(vertex206);
 	auto vertex207 = new Vertex(245, 469);
 	graph->addVertex(vertex207);
-	graph->addVertex(vertex207);
-	graph->setImker(vertex207);
-	_imker->setX(245);
-	_imker->setY(469);
 	auto vertex211 = new Vertex(87, 61);
 	graph->addVertex(vertex211);
 	auto vertex306 = new Vertex(345, 468);
@@ -441,13 +438,12 @@ void GameController::fillGraph()
 	auto vertex325 = new Vertex(190, 576);
 	graph->addVertex(vertex325);
 	auto vertex327 = new Vertex(384, 555); // Dit is de basis rechtsonder
-	vertex327->setImpker(true);
-	graph->setBase(vertex327);
-	/*graph->setImker(vertex327);*/
-	//_imker->setX(384);
-	//_imker->setY(555);
-
 	graph->addVertex(vertex327);
+	graph->setImker(vertex327);
+	graph->setBase(vertex327);
+	_imker->setX(384);
+	_imker->setY(555);
+
 	graph->addEdge(new Edge(vertex103, vertex104));
 	graph->addEdge(new Edge(vertex106, vertex105));
 	graph->addEdge(new Edge(vertex104, vertex105));
@@ -563,7 +559,7 @@ void GameController::fillGraph()
 	graph->addEdge(new Edge(vertex322, vertex176));
 	graph->addEdge(new Edge(vertex180, vertex181));
 	graph->addEdge(new Edge(vertex325, vertex322));
-	graph->addEdge(new Edge(vertex204, vertex327));
+	graph->addEdge(new Edge(vertex204, vertex327));	
 }
 
 void GameController::firstBees()

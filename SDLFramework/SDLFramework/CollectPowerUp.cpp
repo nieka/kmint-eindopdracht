@@ -9,6 +9,7 @@ class GameController;
 CollectPowerUp::CollectPowerUp(Imker* imker)
 {
 	_imker = imker;
+	moveSteps.clear();
 }
 
 CollectPowerUp::~CollectPowerUp()
@@ -34,5 +35,20 @@ void CollectPowerUp::update(GameController * controller)
 void CollectPowerUp::Move(GameController* controller)
 {
 	Graph* graph = controller->getGrapth();
-	graph->move(graph->getImker(), graph->getPowerUp());
+	if (canMove(graph)) {
+		if (moveSteps.size() == 0) {
+			moveSteps = graph->move(graph->getImker(), graph->getPowerUp());
+			graph->setImpkerGoal(graph->getPowerUp());
+		}
+		else {
+			Vertex* loc = moveSteps.at(0);
+			loc->setImpker(true);
+			graph->setImker(loc);
+			moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
+		}
+	}
+	else {
+		imkerMovement(*graph);
+	}
+	
 }
