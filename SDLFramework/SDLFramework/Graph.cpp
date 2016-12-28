@@ -36,7 +36,7 @@ void Graph::addEdge(Edge * edge)
 
 std::vector<Vertex*> Graph::move(Vertex* start, Vertex* goal)
 {
-	setImpkerGoal(goal);
+	//setImpkerGoal(goal);
 	std::vector<Vertex*> cl;
 
 	if (start != goal)
@@ -52,32 +52,71 @@ std::vector<Vertex*> Graph::move(Vertex* start, Vertex* goal)
 		while (!ol.empty()) {
 			Vertex* current = ol.top();
 			ol.pop();
+			set.erase(current);
 			if (current == goal) {
 				//We hebben ons doel berijkt.
 				std::cout << "De locatie van de goal is: x= " << goal->getX() << " y= " << goal->getY() << std::endl;
-				cl.at(cl.size() - 1)->setParent(current);
-				cl.push_back(current);
+				//cl.at(cl.size() - 1)->setParent(current);
+				cl.push_back(current);				
 				return cl;
 			}
-			cl.push_back(current);
-			for each (Vertex* neighbor in getNeighbors(current))
-			{
-				if (!(std::find(cl.begin(), cl.end(), neighbor) != cl.end())) {
-					if (!(std::find(set.begin(), set.end(), neighbor) != set.end())) {
-						neighbor->setF(neighbor->getG() + heuristic(neighbor, goal)); // boosdoener
-						//neighbor zit nog niet in de openlist
-						ol.push(neighbor);
-						set.insert(neighbor);
-					}
-					else {
-						Vertex* openingNeighbor = ol.top();
-						if (neighbor->getG() < openingNeighbor->getG()) {
-							openingNeighbor->setG(neighbor->getG());
-							openingNeighbor->setParent(neighbor->getParent());
+			//check if the current node is a node on a edge of the last node
+			if (cl.size() > 0) {
+				Vertex* lastnode = cl.back();
+				if (lastnode->connectedTo(current)) {
+					cl.push_back(current);
+					std::vector<Vertex*> neighbors = getNeighbors(current);
+					for each (Vertex* neighbor in neighbors)
+					{
+						if (neighbors.size() == 1 || !(std::find(cl.begin(), cl.end(), neighbor) != cl.end())) {
+							if (!(std::find(set.begin(), set.end(), neighbor) != set.end())) {
+								neighbor->setF(neighbor->getG() + heuristic(neighbor, goal)); // boosdoener
+																							  //neighbor zit nog niet in de openlist
+								ol.push(neighbor);
+								set.insert(neighbor);
+							}
+							else {
+								if (ol.size() != 0) {
+									Vertex* openingNeighbor = ol.top();
+									if (neighbor->getG() < openingNeighbor->getG()) {
+										openingNeighbor->setG(neighbor->getG());
+										openingNeighbor->setParent(neighbor->getParent());
+									}
+								}
+
+							}
 						}
 					}
 				}
 			}
+			else {
+				cl.push_back(current);
+				std::vector<Vertex*> neighbors = getNeighbors(current);
+				for each (Vertex* neighbor in neighbors)
+				{
+					if (neighbors.size() == 1 || !(std::find(cl.begin(), cl.end(), neighbor) != cl.end())) {
+						if (!(std::find(set.begin(), set.end(), neighbor) != set.end())) {
+							neighbor->setF(neighbor->getG() + heuristic(neighbor, goal)); // boosdoener
+																						  //neighbor zit nog niet in de openlist
+							ol.push(neighbor);
+							set.insert(neighbor);
+						}
+						else {
+							if (ol.size() != 0) {
+								Vertex* openingNeighbor = ol.top();
+								if (neighbor->getG() < openingNeighbor->getG()) {
+									openingNeighbor->setG(neighbor->getG());
+									openingNeighbor->setParent(neighbor->getParent());
+								}
+							}
+
+						}
+					}
+				}
+			}
+
+
+			
 		}
 	}
 	return cl;

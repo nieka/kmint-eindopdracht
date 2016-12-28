@@ -56,8 +56,8 @@ void ChaseBees::update(GameController * controller)
 	for each (Bee* bee in controller->getGameobjecten())
 	{
 		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced() && _imker->getChatchedBees().size() <= 10) {
-			//bee->setCathced(true);
-			//_imker->addcatchedBee(bee);
+			bee->setCathced(true);
+			_imker->addcatchedBee(bee);
 			std::cout << "Catched a bee" << std::endl;
 			std::cout << "Bee's: " << std::to_string(_imker->getChatchedBees().size()) << std::endl;
 		}
@@ -84,6 +84,7 @@ void ChaseBees::Move(GameController* controller)
 			}
 			_targetPos = graph->getVertexAt(target->getX(), target->getY());
 			moveSteps = graph->move(graph->getImker(), _targetPos);
+			graph->setImpkerGoal(_targetPos);
 		}
 		else {
 			Vertex* loc = moveSteps.at(0);

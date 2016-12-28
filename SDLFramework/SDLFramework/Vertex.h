@@ -28,6 +28,7 @@ public:
 	void setPowerUp(bool p);
 	void setImpkerGoal(bool g);
 	bool isImkerGoal() const;
+	bool connectedTo(Vertex* target);
 private:
 	int _x;
 	int _y;

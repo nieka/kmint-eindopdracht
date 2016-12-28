@@ -30,14 +30,19 @@ void GoToBase::update(GameController * controller)
 void GoToBase::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	if (moveSteps.size() == 0) {
-		graph->move(graph->getImker(), graph->getBase());
+	if (canMove(graph)) {
+		if (moveSteps.size() == 0) {
+			moveSteps = graph->move(graph->getImker(), graph->getBase());
+			graph->setImpkerGoal(graph->getBase());
+		}
+		else {
+			Vertex* loc = moveSteps.at(0);
+			loc->setImpker(true);
+			graph->setImker(loc);
+			moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
+		}
 	}
 	else {
-		Vertex* loc = moveSteps.at(0);
-		loc->setImpker(true);
-		graph->setImker(loc);
-		moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
-	}
-	
+		imkerMovement(*graph);
+	}	
 }

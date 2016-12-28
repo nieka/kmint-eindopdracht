@@ -57,12 +57,12 @@ SDLFacade::SDLFacade(int offsetX, int offsetY, int width, int height)
 		return;
 	}
 
-	//mFont = TTF_OpenFont(GetRelativePath("Resources/OpenSans-Regular.ttf").c_str(), mFontSize);
-	SetFontSize(12);
-	SetFont("OpenSans-Regular.ttf");
+	mFont = TTF_OpenFont(GetRelativePath("Resources/open-sans.light.ttf").c_str(), mFontSize);
+	//SetFontSize(12);
+	//SetFont("OpenSans-Regular.ttf");
 
 	mInstance = this;
-	mGameObjects.reserve(32);
+	//mGameObjects.reserve(32);
 }
 
 
@@ -226,7 +226,6 @@ void SDLFacade::DrawText(const std::string & message, uint32_t offsetX, uint32_t
 {
 	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
 	//SDL_Color bgColor = { mTextBackgroundColor.r, mTextBackgroundColor.g, mTextBackgroundColor.b, mTextBackgroundColor.a };
-	mFont = TTF_OpenFont(GetRelativePath("Resources/open-sans.light.ttf").c_str(), mFontSize);
 	SDL_Surface * surface = TTF_RenderText_Blended(mFont, message.c_str(), color);
 	if (surface)
 	{

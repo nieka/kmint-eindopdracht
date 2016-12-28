@@ -33,39 +33,45 @@ void Panic::update(GameController * controller)
 void Panic::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	if (_targetPos == graph->getImker() || _targetPos == nullptr || moveSteps.size() == 0) {
-		Vector2D imkerPos;
-		imkerPos.setX(_imker->getX());
-		imkerPos.sety(_imker->getY());
-		Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
-		int distanceToBee = 0;
+	if (canMove(graph)) {
+		if (_targetPos == graph->getImker() || _targetPos == nullptr || moveSteps.size() == 0) {
+			Vector2D imkerPos;
+			imkerPos.setX(_imker->getX());
+			imkerPos.sety(_imker->getY());
+			Bee* target = dynamic_cast<Bee*>(controller->getGameobjecten().at(0));
+			int distanceToBee = 0;
 
-		for each (Bee* bee in controller->getGameobjecten())
-		{
-			if (imkerPos.dist(imkerPos, bee->getPosition()) > distanceToBee) {
-				target = bee;
-				distanceToBee = imkerPos.dist(imkerPos, bee->getPosition());
+			for each (Bee* bee in controller->getGameobjecten())
+			{
+				if (imkerPos.dist(imkerPos, bee->getPosition()) > distanceToBee) {
+					target = bee;
+					distanceToBee = imkerPos.dist(imkerPos, bee->getPosition());
+				}
 			}
-		}
 
-		Vector2D targetVector;
-		if (target->getX() < 300) {
-			targetVector.setX(600);
+			Vector2D targetVector;
+			if (target->getX() < 300) {
+				targetVector.setX(600);
+			}
+			else {
+				targetVector.setX(0);
+			}
+			targetVector.sety(target->getY());
+
+			_targetPos = graph->getVertexAt(targetVector.getX(), targetVector.getY());
+
+			moveSteps = graph->move(graph->getImker(), _targetPos);
+			graph->setImpkerGoal(_targetPos);
 		}
 		else {
-			targetVector.setX(0);
+			Vertex* loc = moveSteps.at(0);
+			loc->setImpker(true);
+			graph->setImker(loc);
+			moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
 		}
-		targetVector.sety(target->getY());
-		
-		_targetPos = graph->getVertexAt(targetVector.getX(), targetVector.getY());
-
-		moveSteps = graph->move(graph->getImker(), _targetPos);
 	}
 	else {
-		Vertex* loc = moveSteps.at(0);
-		loc->setImpker(true);
-		graph->setImker(loc);
-		moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
+		imkerMovement(*graph);
 	}
 	
 	
