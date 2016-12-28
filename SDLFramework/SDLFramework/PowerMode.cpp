@@ -12,6 +12,7 @@
 PowerMode::PowerMode(Imker * imker)
 {
 	_imker = imker;
+	moveSteps.clear();
 }
 
 PowerMode::~PowerMode()
@@ -46,7 +47,7 @@ void PowerMode::update(GameController * controller)
 void PowerMode::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	if (_targetPos == graph->getImker() || _targetPos == nullptr) {
+	if (_targetPos == graph->getImker() || _targetPos == nullptr || moveSteps.size() == 0) {
 		Vector2D imkerPos;
 		imkerPos.setX(_imker->getX());
 		imkerPos.sety(_imker->getY());
@@ -61,9 +62,12 @@ void PowerMode::Move(GameController * controller)
 			}
 		}
 		_targetPos = graph->getVertexAt(target->getX(), target->getY());
-		graph->move(graph->getImker(), _targetPos);
+		moveSteps = graph->move(graph->getImker(), _targetPos);
 	}
 	else {
-		graph->move(graph->getImker(), _targetPos);
+		Vertex* loc = moveSteps.at(0);
+		loc->setImpker(true);
+		graph->setImker(loc);
+		moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
 	}
 }

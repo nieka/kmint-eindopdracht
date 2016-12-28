@@ -39,8 +39,7 @@ void GameController::initialize()
 		_sdlFacade->SetColor(Color(255, 10, 40, 255));
 
 		_imker = new Imker(_sdlFacade);
-
-
+	
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
 		addBees();
@@ -137,11 +136,13 @@ void GameController::run()
 			for (int i = 0; i < 10; i++) {
 				_imker->update(this);
 				_imker->draw(_sdlFacade);
+				_imker->move(this);
 			}
 		}
 		else {
 			_imker->update(this);
 			_imker->draw(_sdlFacade);
+			_imker->move(this);
 		}
 		
 		

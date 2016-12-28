@@ -34,13 +34,14 @@ void Graph::addEdge(Edge * edge)
 	edges.push_back(edge);
 }
 
-void Graph::move(Vertex* start, Vertex* goal)
+std::vector<Vertex*> Graph::move(Vertex* start, Vertex* goal)
 {
 	setImpkerGoal(goal);
+	std::vector<Vertex*> cl;
 
 	if (start != goal)
 	{
-		std::vector<Vertex*> cl;
+		
 		std::priority_queue<Vertex*, std::vector<Vertex*>, compare> ol;
 		std::set<Vertex*> set;
 		ol.push(start);
@@ -55,8 +56,8 @@ void Graph::move(Vertex* start, Vertex* goal)
 				//We hebben ons doel berijkt.
 				std::cout << "De locatie van de goal is: x= " << goal->getX() << " y= " << goal->getY() << std::endl;
 				cl.at(cl.size() - 1)->setParent(current);
-				move(current);
-				return;
+				cl.push_back(current);
+				return cl;
 			}
 			cl.push_back(current);
 			for each (Vertex* neighbor in getNeighbors(current))
@@ -79,6 +80,7 @@ void Graph::move(Vertex* start, Vertex* goal)
 			}
 		}
 	}
+	return cl;
 }
 
 void Graph::draw(SDLFacade * facade)

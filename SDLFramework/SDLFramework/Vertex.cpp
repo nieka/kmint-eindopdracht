@@ -1,4 +1,5 @@
 #include "Vertex.h"
+#include <string>
 
 
 Vertex::Vertex(int x, int y)
@@ -97,6 +98,7 @@ void Vertex::draw(SDLFacade* app)
 		app->DrawCircle(getX(), getY(), 5, true);
 	}
 	
+	app->SetColor(Color(0, 0, 0, 0));
 }
 
 std::vector<Edge*> Vertex::getEdges()

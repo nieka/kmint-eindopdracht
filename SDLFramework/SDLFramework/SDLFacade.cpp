@@ -226,7 +226,7 @@ void SDLFacade::DrawText(const std::string & message, uint32_t offsetX, uint32_t
 {
 	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
 	//SDL_Color bgColor = { mTextBackgroundColor.r, mTextBackgroundColor.g, mTextBackgroundColor.b, mTextBackgroundColor.a };
-
+	mFont = TTF_OpenFont(GetRelativePath("Resources/open-sans.light.ttf").c_str(), mFontSize);
 	SDL_Surface * surface = TTF_RenderText_Blended(mFont, message.c_str(), color);
 	if (surface)
 	{

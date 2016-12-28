@@ -8,6 +8,7 @@
 Panic::Panic(Imker* imker)
 {
 	_imker = imker;
+	moveSteps.clear();
 }
 
 
@@ -32,7 +33,7 @@ void Panic::update(GameController * controller)
 void Panic::Move(GameController * controller)
 {
 	Graph* graph = controller->getGrapth();
-	if (_targetPos == graph->getImker() || _targetPos == nullptr) {
+	if (_targetPos == graph->getImker() || _targetPos == nullptr || moveSteps.size() == 0) {
 		Vector2D imkerPos;
 		imkerPos.setX(_imker->getX());
 		imkerPos.sety(_imker->getY());
@@ -58,10 +59,13 @@ void Panic::Move(GameController * controller)
 		
 		_targetPos = graph->getVertexAt(targetVector.getX(), targetVector.getY());
 
-		graph->move(graph->getImker(), _targetPos);
+		moveSteps = graph->move(graph->getImker(), _targetPos);
 	}
 	else {
-		graph->move(graph->getImker(), _targetPos);
+		Vertex* loc = moveSteps.at(0);
+		loc->setImpker(true);
+		graph->setImker(loc);
+		moveSteps.erase(moveSteps.begin(), moveSteps.begin() + 1);
 	}
 	
 	

@@ -28,13 +28,13 @@ void Imker::update(GameController * controller)
 	_catchRadius += 0.333;
 
 
-	if (dynamic_cast<PowerMode*>(_behavior) != NULL)
-	{
-		imkerMovement(*graph);
-		imkerMovement(*graph);
-	}
+	//if (dynamic_cast<PowerMode*>(_behavior) != NULL)
+	//{
+	//	imkerMovement(*graph);
+	//	imkerMovement(*graph);
+	//}
 
-	imkerMovement(*graph);
+	//imkerMovement(*graph);
 }
 
 	
