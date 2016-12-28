@@ -74,6 +74,9 @@ int GameController::getAmountBees() const
 
 void GameController::newGeneration()
 {
+	std::cout << "== old generation ==" << std::endl;
+	PrintBeeStats();
+
 	//place the bee's in oldgeneration 
 	//and remove the bee's from the gameobjects vector for safe deletion.
 	std::vector<Bee*> oldGeneration;
@@ -85,18 +88,49 @@ void GameController::newGeneration()
 
 	_gameObjecten.clear();
 
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> bee(0, _amountBees - 1); // random number for selecting bee
+	std::uniform_int_distribution<int> float1(0, 4);
+	std::uniform_int_distribution<int> float2(0, 9);
+
+	while (_gameObjecten.size() <= _amountBees)
+	{
+		Bee* b1 = nullptr;
+		Bee* b2 = nullptr;
+
+		while (b2 == nullptr)
+		{
+			int randombee = bee(rng);
+			Bee* b = dynamic_cast<Bee*>(oldGeneration.at(randombee));
+			float chance = (float)b->getTickalive() / 500;
+			float modifyer = float1(rng) + ((float)float2(rng) / 10);
+
+ 			if (chance + modifyer >= 5)
+			{
+				if (b1 == nullptr)
+				{
+					b1 = b;
+				}
+				else
+				{
+					b2 = b;
+				}
+			}
+
+			if (b2 != nullptr)
+			{
+				newBee(b1, b2);
+			}
+		}
+	}
+
 	for (Bee* b : oldGeneration)
 	{
 		delete b;
 	}
 
-	//print bee's ticks alive
-	for (int i = 0; i < _amountBees; ++i)
-	{
-		Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
-		std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
-	}
-
+	std::cout << "== new generation ==" << std::endl;
 	PrintBeeStats();
 }
 
@@ -579,13 +613,18 @@ void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 		}
 		else
 		{
-			std::uniform_int_distribution<int> r(0, 10);
+			std::uniform_int_distribution<int> r(2, 10);
 			newbee[mutateLocation] = r(rng);
 		}
 	}
+	//location
+	Bee* bee = new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]);
+	Utils utils;
+	bee->setX(utils.getRandom(1, 599));
+	bee->setY(utils.getRandom(1, 599));
 
 	//bee added to gameobjects
-	_gameObjecten.push_back(new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]));
+	_gameObjecten.push_back(bee);
 }
 
 void GameController::PrintBeeStats()
