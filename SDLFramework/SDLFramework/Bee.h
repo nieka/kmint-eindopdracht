@@ -37,6 +37,7 @@ public:
 	
 
 private:
+	SDLFacade* _facade = nullptr;
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D acceleration;

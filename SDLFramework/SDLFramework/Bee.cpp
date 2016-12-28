@@ -7,7 +7,8 @@
 
 Bee::Bee(SDLFacade* facade)
 {
-	_texture = facade->LoadTexture("bee.png");
+	_facade = facade;
+	_texture = _facade->LoadTexture("bee.png");
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
 	std::uniform_int_distribution<int> uni(0, 600); // guaranteed unbiased
@@ -50,7 +51,7 @@ Bee::Bee(SDLFacade * facade, int topspeed, int detection, int flee)
 
 Bee::~Bee()
 {
-	delete _texture;
+	_facade->RemoveTexture(_texture);
 }
 
 void Bee::update(GameController * controller)

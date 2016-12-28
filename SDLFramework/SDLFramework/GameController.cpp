@@ -124,23 +124,17 @@ void GameController::newGeneration()
 		}
 	}
 
-
-
-
-
-
-
 	for (Bee* b : oldGeneration)
 	{
 		delete b;
 	}
 
 	//print bee's ticks alive
-	for (int i = 0; i < _amountBees; ++i)
-	{
-		Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
-		std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
-	}
+	//for (int i = 0; i < _amountBees; ++i)
+	//{
+	//	Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
+	//	std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
+	//}
 
 }
 
