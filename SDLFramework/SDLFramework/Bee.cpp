@@ -41,8 +41,6 @@ Bee::Bee(SDLFacade * facade, int topspeed, int detection, int flee)
 	_detectionRadius = detection;
 	_fleeSpeed = flee;
 
-
-
 	velocity.setX(uni(rng));
 	velocity.sety(uni(rng));
 }

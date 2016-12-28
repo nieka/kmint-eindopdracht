@@ -75,5 +75,7 @@ void PowerMode::Move(GameController * controller)
 	}
 	else {
 		imkerMovement(*graph);
+		imkerMovement(*graph);
+		imkerMovement(*graph);
 	}
 }
