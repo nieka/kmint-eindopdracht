@@ -8,7 +8,6 @@
 Imker::Imker(SDLFacade * facade)
 {
 	_texture = facade->LoadTexture("beekeeper.png");
-	//_behavior = new CollectPowerUp(this);
 	_behavior = new ChaseBees(this);
 	_catchRadius = 100;
 }
@@ -44,7 +43,9 @@ void Imker::draw(SDLFacade * facade)
 	_offsetX = _x;
 	_offsetY = _y - 25;
 	facade->DrawTexture(_texture, _offsetX, _offsetY,52,75);
+	facade->SetColor(Color(225,225, 225, 225));
 	facade->DrawCircle(_x, _y, _catchRadius, false);
+
 }
 
 void Imker::move(GameController* controller)
@@ -98,6 +99,36 @@ int Imker::getCatchRadius() const
 	return _catchRadius;
 }
 
+int Imker::getReturnToBase() const
+{
+	return _returnToBase;
+}
+
+int Imker::getCollectPowerUp() const
+{
+	return _collectPowerUp;
+}
+
+int Imker::getPanic() const
+{
+	return _panic;
+}
+
+void Imker::setReturnToBase(int v)
+{
+	_returnToBase = v;
+}
+
+void Imker::setCollectPowerUp(int v)
+{
+	_collectPowerUp = v;
+}
+
+void Imker::setPanic(int v)
+{
+	_panic = v;
+}
+
 void Imker::addcatchedBee(IGameObject * bee)
 {
 	_catchedBees.push_back(bee);
@@ -135,6 +166,18 @@ void Imker::deliverbees(GameController* con)
 
 	if (_beesInBase.size() == con->getAmountBees())
 	{
-		con->newBees();
+		_catchRadius = 100;
+		con->newGeneration();
+	}
+}
+
+void Imker::releaseBee()
+{
+	if (_catchedBees.size() != 0)
+	{
+		IGameObject* r = _catchedBees[(_catchedBees.size() - 1)];
+		Bee* b = dynamic_cast<Bee*>(r);
+		b->setCathced(false);
+		_catchedBees.pop_back();
 	}
 }

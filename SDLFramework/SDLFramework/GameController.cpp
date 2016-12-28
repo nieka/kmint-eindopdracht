@@ -42,7 +42,7 @@ void GameController::initialize()
 	
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
-		addBees();
+		firstBees();
 		run();
 	}
 }
@@ -72,9 +72,39 @@ int GameController::getAmountBees() const
 	return _amountBees;
 }
 
-void GameController::newBees()
+void GameController::newGeneration()
 {
-	std::cout << "new generation bee's" << std::endl;
+	//place the bee's in oldgeneration 
+	//and remove the bee's from the gameobjects vector for safe deletion.
+	std::vector<Bee*> oldGeneration;
+
+	for (int i = 0; i < _gameObjecten.size(); ++i)
+	{
+		oldGeneration.push_back(dynamic_cast<Bee*>(_gameObjecten[i]));
+	}
+
+	_gameObjecten.clear();
+	
+
+
+
+
+
+
+
+
+	for (Bee* b : oldGeneration)
+	{
+		delete b;
+	}
+
+	//print bee's ticks alive
+	for (int i = 0; i < _amountBees; ++i)
+	{
+		Bee* b = dynamic_cast<Bee*>(_gameObjecten[i]);
+		std::cout << std::to_string(b->getTickalive() / 500) << std::endl;
+	}
+
 }
 
 void GameController::run()
@@ -373,6 +403,7 @@ void GameController::fillGraph()
 	auto vertex327 = new Vertex(384, 555); // Dit is de basis rechtsonder
 	graph->addVertex(vertex327);
 	graph->setImker(vertex327);
+	graph->setBase(vertex327);
 	_imker->setX(384);
 	_imker->setY(555);
 
@@ -494,7 +525,7 @@ void GameController::fillGraph()
 	graph->addEdge(new Edge(vertex204, vertex327));	
 }
 
-void GameController::addBees()
+void GameController::firstBees()
 {
 	Utils utils;
 	for (int i = 0; i < _amountBees; i++) {
@@ -503,6 +534,67 @@ void GameController::addBees()
 		bee->setY(utils.getRandom(1, 599));
 		_gameObjecten.push_back(bee);
 	}
+}
+
+void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
+{
+	//converting gameobjects to bee's
+	Bee* a = dynamic_cast<Bee*>(beeA);
+	Bee* b = dynamic_cast<Bee*>(beeB);
+
+	std::random_device rd;     
+	std::mt19937 rng(rd());    
+
+	//bee's infomation
+	std::vector<int> ba;
+	ba.push_back(a->getTopSpeed());
+	ba.push_back(a->getDetectionRadius());
+	ba.push_back(a->FleeSpeed());
+
+	std::vector<int> bb;
+	bb.push_back(b->getTopSpeed());
+	bb.push_back(b->getDetectionRadius());
+	bb.push_back(b->FleeSpeed());
+
+	std::vector<int> newbee;
+
+	//creating new bee
+	std::uniform_int_distribution<int> h(0, 2);
+	int slice = h(rng);
+
+	for (int i = 0; i < slice; ++i)
+	{
+		newbee.push_back(ba[i]);
+	}
+
+	for (int j = slice; j < 3; ++j)
+	{
+		newbee.push_back(bb[j]);
+	}
+
+	
+	//mutation
+	std::uniform_int_distribution<int> mutateChance(0, 1000);
+
+	if (mutateChance(rng) == 1)
+	{
+		std::uniform_int_distribution<int> ml(0, 2);
+		int mutateLocation = ml(rng);
+
+		if (mutateLocation == 1)
+		{
+			std::uniform_int_distribution<int> r(0, 200);
+			newbee[1] = r(rng);
+		}
+		else
+		{
+			std::uniform_int_distribution<int> r(0, 10);
+			newbee[mutateLocation] = r(rng);
+		}
+	}
+
+	//bee added to gameobjects
+	_gameObjecten.push_back(new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]));
 }
 
 void GameController::PrintBeeStats()

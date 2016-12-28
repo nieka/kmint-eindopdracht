@@ -8,17 +8,40 @@
 Bee::Bee(SDLFacade* facade)
 {
 	_texture = facade->LoadTexture("bee.png");
-
-	r = 2.0;
-	_mass = 5;
-	_topSpeed = 5;
-	maxforce = 20;
-	_detectionRadius = 100;
-	_fleeSpeed = 7;
-
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
 	std::uniform_int_distribution<int> uni(0, 600); // guaranteed unbiased
+	std::uniform_int_distribution<int> l(0, 10);
+	std::uniform_int_distribution<int> h(0, 200);
+
+	r = 2.0;
+	_mass = 5;
+	_topSpeed = l(rng);
+	maxforce = 20;
+	_detectionRadius = h(rng);
+	_fleeSpeed = l(rng);
+
+	
+
+	velocity.setX(uni(rng));
+	velocity.sety(uni(rng));
+}
+
+Bee::Bee(SDLFacade * facade, int topspeed, int detection, int flee)
+{
+	_texture = facade->LoadTexture("bee.png");
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(0, 600); // guaranteed unbiased
+
+	r = 2.0;
+	_mass = 5;
+	_topSpeed = topspeed;
+	maxforce = 20;
+	_detectionRadius = detection;
+	_fleeSpeed = flee;
+
+
 
 	velocity.setX(uni(rng));
 	velocity.sety(uni(rng));

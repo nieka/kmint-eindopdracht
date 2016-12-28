@@ -111,7 +111,7 @@ void Vertex::draw(SDLFacade* app)
 	
 	app->SetColor(Color(0, 0, 0, 0));
 
-	app->DrawText(std::to_string(getX()) + std::to_string(getY()), getX(), getY());
+	//app->DrawText(std::to_string(getX()) + std::to_string(getY()), getX(), getY());
 }
 
 std::vector<Edge*> Vertex::getEdges()

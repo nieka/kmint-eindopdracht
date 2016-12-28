@@ -15,9 +15,6 @@ bool ImkerBehavior::canMove(Graph* graph) {
 
 void ImkerBehavior::imkerMovement(Graph & graph)
 {
-	std::cout << "start pos imker: x= " << std::to_string(_imker->getX()) << " y= " << std::to_string(_imker->getY()) << std::endl;
-	std::cout << "target pos imker: x= " << std::to_string(graph.getImker()->getX()) << " y= " << std::to_string(graph.getImker()->getY()) << std::endl;
-	std::cout << "end pos imker: x= " << std::to_string(_imker->getX()) << " y= " << std::to_string(_imker->getY()) << std::endl;
 	if (_imker->getX() < graph.getImker()->getX())
 	{
 		_imker->setX(_imker->getX() + 1);

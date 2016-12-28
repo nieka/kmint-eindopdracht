@@ -8,11 +8,14 @@ class GoToBase :
 	public ImkerBehavior
 {
 public:
-	GoToBase(Imker* imker);
+	GoToBase(Imker* imker, std::string laststate);
 	~GoToBase();
 
 	void checkState(GameController * controller) override;
 	void update(GameController* controller) override;
 	void Move(GameController* controller) override;
+	void reflection();
+private:
+	std::string _lastState;
 };
 

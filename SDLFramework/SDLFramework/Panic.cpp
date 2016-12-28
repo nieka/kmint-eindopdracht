@@ -19,14 +19,14 @@ Panic::~Panic()
 void Panic::checkState(GameController * controller)
 {
 	if (_imker->getChatchedBees().size() == 0) {
-		_imker->setBehavior(new GoToBase(_imker));
+		_imker->setBehavior(new GoToBase(_imker, "panicmode"));
 	}
 }
 
 void Panic::update(GameController * controller)
 {
 	if (utils.getRandom(0, 10) < 3) {
-		_imker->getChatchedBees().pop_back();
+		_imker->releaseBee();
 	}
 }
 
