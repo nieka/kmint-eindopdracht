@@ -18,8 +18,15 @@ void GoToBase::checkState(GameController * controller)
 	Graph* graph = controller->getGrapth();
 	if (graph->getImker() == graph->getBase())
 	{
+		std::cout << "== Old FSM ==" << std::endl;
+		std::cout << "return to base: " << std::to_string(_imker->getReturnToBase()) << std::endl;
+		std::cout << "collect power up: " << std::to_string(_imker->getCollectPowerUp()) << std::endl;
+		std::cout << "panic: " << std::to_string(100 - (_imker->getReturnToBase() + _imker->getCollectPowerUp())) << std::endl;
+		std::cout << "average: " << std::to_string(_imker->getAverage()) << std::endl;
+
 		reflection();
-		std::cout << "== FSM ==" << std::endl;
+
+		std::cout << "== New FSM ==" << std::endl;
 		std::cout << "return to base: " << std::to_string(_imker->getReturnToBase()) << std::endl;
 		std::cout << "collect power up: " << std::to_string(_imker->getCollectPowerUp()) << std::endl;
 		std::cout << "panic: " << std::to_string(100 - (_imker->getReturnToBase() + _imker->getCollectPowerUp())) << std::endl;

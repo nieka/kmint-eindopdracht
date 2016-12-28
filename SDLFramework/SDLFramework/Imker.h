@@ -45,7 +45,7 @@ protected:
 	int _collectPowerUp = 33;
 	int _panic = 33;
 	int TimeTicks = 0;
-	float average = 1;
+	float average;
 	std::vector<IGameObject*> _catchedBees;
 	std::vector<IGameObject*> _beesInBase;
 };
