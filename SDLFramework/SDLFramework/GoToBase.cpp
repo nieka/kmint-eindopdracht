@@ -173,5 +173,5 @@ void GoToBase::reflection()
 		}
 	}
 
-	
+	_imker->setTicks(0);
 }
