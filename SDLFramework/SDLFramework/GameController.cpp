@@ -43,7 +43,6 @@ void GameController::initialize()
 		fillGraph();
 		graph->setPowerUp(_sdlFacade);
 		firstBees();
-		//newGeneration();
 		run();
 	}
 }
@@ -621,9 +620,14 @@ void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 			newbee[mutateLocation] = r(rng);
 		}
 	}
+	//location
+	Bee* bee = new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]);
+	Utils utils;
+	bee->setX(utils.getRandom(1, 599));
+	bee->setY(utils.getRandom(1, 599));
 
 	//bee added to gameobjects
-	_gameObjecten.push_back(new Bee(_sdlFacade, newbee[0], newbee[1], newbee[2]));
+	_gameObjecten.push_back(bee);
 }
 
 void GameController::PrintBeeStats()
