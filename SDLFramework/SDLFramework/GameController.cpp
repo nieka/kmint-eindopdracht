@@ -629,7 +629,7 @@ void GameController::newBee(IGameObject * beeA, IGameObject * beeB)
 		}
 		else
 		{
-			std::uniform_int_distribution<int> r(0, 10);
+			std::uniform_int_distribution<int> r(2, 10);
 			newbee[mutateLocation] = r(rng);
 		}
 	}
