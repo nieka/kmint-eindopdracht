@@ -1,5 +1,6 @@
 #include "Vertex.h"
-
+#include <string>
+#include "Edge.h"
 
 Vertex::Vertex(int x, int y)
 {
@@ -76,6 +77,17 @@ bool Vertex::isImkerGoal() const
 	return _imkerGoal;
 }
 
+bool Vertex::connectedTo(Vertex * target)
+{
+	for each (Edge* edge in getEdges())
+	{
+		if (edge->getVertex1() == target || edge->getVertex2() == target) {
+			return true;
+		}
+	}
+	return false;
+}
+
 int Vertex::getF()
 {
 	return f;
@@ -97,6 +109,9 @@ void Vertex::draw(SDLFacade* app)
 		app->DrawCircle(getX(), getY(), 5, true);
 	}
 	
+	app->SetColor(Color(0, 0, 0, 0));
+
+	//app->DrawText(std::to_string(getX()) + std::to_string(getY()), getX(), getY());
 }
 
 std::vector<Edge*> Vertex::getEdges()

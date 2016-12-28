@@ -13,7 +13,7 @@ public:
 	void addEdge(Edge* edge);
 	std::vector<Vertex*> nodes;
 	std::vector<Edge*> edges;
-	void move(Vertex* start, Vertex* goal);
+	std::vector<Vertex*> move(Vertex* start, Vertex* goal);
 	void draw(SDLFacade* facade);
 	Vertex* getPowerUp();
 	Vertex* getImker();
