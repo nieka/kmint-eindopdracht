@@ -62,7 +62,7 @@ void ChaseBees::update(GameController * controller)
 
 	for each (Bee* bee in controller->getGameobjecten())
 	{
-		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced() && _imker->getChatchedBees().size() <= 10) {
+		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced() && _imker->getChatchedBees().size() < 10) {
 			bee->setCathced(true);
 			_imker->addcatchedBee(bee);
 			std::cout << "Catched a bee" << std::endl;

@@ -35,7 +35,7 @@ void PowerMode::update(GameController * controller)
 
 	for each (Bee* bee in controller->getGameobjecten())
 	{
-		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced()) {
+		if (imkerPos.dist(imkerPos, bee->getPosition()) <= _imker->getCatchRadius() && !bee->isCathced() && _imker->getChatchedBees().size() < 30) {
 			bee->setCathced(true);
 			_imker->addcatchedBee(bee);
 			std::cout << "Catched a bee" << std::endl;
