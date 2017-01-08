@@ -88,6 +88,14 @@ std::vector<Vertex*> Graph::move(Vertex* start, Vertex* goal)
 						}
 					}
 				}
+				else {
+					for (int i = 0; i < cl.size(); i++) {
+						Vertex* lastnode = cl.back();
+						if (lastnode->connectedTo(current)) {
+							cl.erase(std::remove(cl.begin(), cl.end(), lastnode), cl.end());
+						}
+					}
+				}
 			}
 			else {
 				cl.push_back(current);
